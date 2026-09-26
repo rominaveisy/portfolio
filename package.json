@@ -10,7 +10,8 @@
     "preview": "astro preview --host 127.0.0.1",
     "check": "astro check",
     "format": "prettier --write src scripts tests README.md",
-    "test": "playwright test"
+    "test": "node scripts/verify-routing.mjs && playwright test",
+    "verify:production": "node scripts/verify-production.mjs"
   },
   "engines": {
     "node": ">=22.12.0"

@@ -6,10 +6,10 @@ Astro, CSS and JavaScript, built from the approved Figma desktop designs. The de
 
 Start with the [complete project handoff](docs/HANDOFF.md) and [copy-paste prompt for the next Codex task](docs/CONTINUE_PROMPT.md). They record the latest owner decisions, setup, verification limits and remaining work through launch.
 
-**Clone `feature/figma-desktop`, not `main`: `main` still contains only the initial README at this handoff.**
+**`main` is now the production source.** The historical handoff above preserves the original design decisions. See [the launch record](docs/LAUNCH.md) for current deployment status and [the responsive review](docs/NEW_COMPUTER_REVIEW.md) for verification.
 
 ```sh
-git clone --branch feature/figma-desktop https://github.com/rominaveisy/portfolio.git
+git clone https://github.com/rominaveisy/portfolio.git
 cd portfolio
 ```
 
@@ -17,21 +17,21 @@ The tracked source, assets, motion data and original CV are sufficient for a nor
 
 ## Current stage
 
-The desktop review build is on `feature/figma-desktop`. `main` is unchanged. All seven screens, the 55-image About gallery, scroll-controlled Home, email-draft form and original CV are implemented.
+The owner has authorized the production launch at **https://rominaveisy.com/**. The original desktop checkpoint remains on `feature/figma-desktop`; responsive work is preserved on `codex/responsive-and-launch`. All seven screens, the 55-image About gallery, scroll-controlled Home, email-draft form, original CV and phone/tablet layouts are implemented. See the launch record for the exact deployed version and live verification.
 
-This is **not a launched website**. Cloudflare deployment, domain/HTTPS checks, the approved social-sharing image and the full responsive pass are still pending. Mobile currently has a basic Home fallback; the other desktop compositions need proper responsive reflow on a separate branch after desktop approval.
+Studio and the third project's coming-soon status remain intentional. No custom social-sharing image has been approved; existing text metadata is retained.
 
 Changing Figma does not automatically change the website. The code/assets must also be updated.
 
 ## Open the local preview
 
-On this computer, open PowerShell in `F:\romina\project\portfolio` and run:
+On this computer, open a terminal in `D:\projects\personal website\romina` and run:
 
 ```powershell
-.\scripts\local.ps1 dev
+pnpm dlx pnpm@11.25.0 dev
 ```
 
-Visit **http://127.0.0.1:4321/** and keep the terminal open. Press Ctrl+C there to stop the server. The helper uses installed Node.js or the existing Codex-bundled runtime. If Windows blocks the script, ask for help rather than changing the computer’s execution policy globally.
+Visit **http://127.0.0.1:4321/** and keep the terminal open. Press Ctrl+C there to stop the server. The project-specific pnpm invocation leaves the globally installed version unchanged.
 
 On a fresh computer, install a supported Node.js LTS release (at least 22.12), then:
 
@@ -41,15 +41,15 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-| Command                 | Purpose                                                       |
-| ----------------------- | ------------------------------------------------------------- |
-| `pnpm check`            | Astro/TypeScript validation                                   |
-| `pnpm test`             | Browser checks; local server on port 4321 and Chrome required |
-| `pnpm build`            | Static preview build in `dist`; search indexing disabled      |
-| `pnpm preview`          | Serve the built files locally                                 |
-| `pnpm build:production` | Build with indexing and sitemap enabled; does not publish     |
+| Command                 | Purpose                                                                       |
+| ----------------------- | ----------------------------------------------------------------------------- |
+| `pnpm check`            | Astro/TypeScript validation                                                   |
+| `pnpm test`             | Canonical routing and browser checks; server on port 4321 and Chrome required |
+| `pnpm build`            | Static preview build in `dist`; search indexing disabled                      |
+| `pnpm preview`          | Serve the built files locally                                                 |
+| `pnpm build:production` | Build with indexing and sitemap enabled; does not publish                     |
 
-On this computer `scripts/local.ps1` also accepts `build`, `check`, `test` and `preview`.
+Use `pnpm exec wrangler dev --local` to serve the built files on port 8787. `pnpm verify:production http://127.0.0.1:8787` checks a local production build; `pnpm verify:production` checks the live domain. Contact checks never send email. Restart the development server if a build/type check invalidates its Vite dependency cache.
 
 ## Where to edit
 
@@ -94,7 +94,7 @@ Where pixel-identical WebP files replaced PNGs, the original PNGs remain locally
 
 A **branch** is a separate line of changes. A **commit** is a saved checkpoint. A **pull request** is a review before changes enter `main`.
 
-**Current pre-launch exception:** start the responsive branch from the latest approved `feature/figma-desktop` commit. Do not use the initial-README `main` as the baseline. The general workflow below applies after the finished website has been reviewed and merged into `main`.
+The original desktop checkpoint remains preserved. New changes should branch from the finished `main` source.
 
 1. Update local `main` from GitHub, with no unsaved changes left behind.
 2. Create a descriptively named branch.
@@ -104,25 +104,24 @@ A **branch** is a separate line of changes. A **commit** is a saved checkpoint. 
 6. Open a pull request and review its changes and preview.
 7. Merge only after approval; then verify the deployed website and Git commit.
 
-GitHub Desktop can perform the Git steps through buttons. Create the mobile branch from the **approved desktop commit** and compare desktop screenshots during mobile work.
+GitHub Desktop can perform the Git steps through buttons. Compare desktop screenshots when changing responsive styles.
 
 Passwords and two-factor codes belong in the services’ own sign-in pages, never in code or chat. No secrets, analytics, database, login, booking or payment features are required.
 
-## Hosting — prepared, not deployed
+## Hosting and production updates
 
-`wrangler.jsonc` prepares a static-assets Worker named `romina-portfolio`, with nested-page routing and a real 404 fallback. No account token or custom-domain route is embedded.
+`wrangler.jsonc` configures the owner's `romina-portfolio` Worker, custom domains, nested-page routing and a real 404 fallback. `worker/index.mjs` permanently redirects HTTP and `www` to the HTTPS apex, preserving paths and query strings, then serves the static assets. `workers.dev` and version URLs are disabled. No token is stored in the repository.
 
-After design approval:
+Publishing uses Wrangler from a signed-in computer. GitHub pushes alone do not deploy the website; no automatic build integration has been configured.
 
-This is a prepared plan, not an existing deployment. Recheck current official Cloudflare documentation and the actual account/DNS state before applying it. Do not use `main` as production until the finished website has been approved and merged there.
+After a reviewed source update and authorization to publish:
 
-1. Sign into Cloudflare directly and connect the `rominaveisy/portfolio` repository to a Worker.
-2. Choose `main` as production and enable preview builds for other branches.
-3. Set the build command to `pnpm build` (preview-safe).
-4. Set the **production** deploy command to `pnpm build:production && pnpm exec wrangler deploy`. The explicit second build enables indexing only for production.
-5. Set the **preview** command to `pnpm exec wrangler preview`, never the production deploy command.
-6. Review a branch preview before connecting the domain.
-7. Connect `rominaveisy.com` as the production custom domain. Configure a permanent `www` → apex redirect preserving paths and query strings. Verify HTTPS, redirects, nested-page refresh, 404 status, search headers and the deployed commit.
+1. Commit and push the source; merge the approved change into `main`.
+2. Run `pnpm build:production` and `pnpm exec wrangler deploy --dry-run`.
+3. Run `pnpm exec wrangler deploy --tag <commit-sha> --message <release-description>`.
+4. Run `pnpm verify:production` and record the source commit and Cloudflare version in [LAUNCH.md](docs/LAUNCH.md).
+
+Use interactive deployment when custom-domain routing changes. Wrangler's noninteractive mode can overwrite conflicting DNS records; inspect any conflicts before proceeding. Preserve unrelated DNS and email records.
 
 Preview builds include noindex metadata, robots exclusion and response headers. This discourages search indexing; it is **not access protection**. Use Cloudflare Access if previews need authentication. Security headers generated at build time must also be checked on a real Worker preview before launch.
 

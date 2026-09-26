@@ -10,6 +10,7 @@ import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
 import '../styles/design.css';
 import '../styles/global.css';
+import '../styles/responsive.css';
 interface Props {
   title: string;
   description: string;
@@ -39,7 +40,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary" />
     <script is:inline>
-      // Desktop reference geometry; mobile refinements will be reviewed separately.
+      // Preserve the reference geometry on desktop; narrower layouts reflow in CSS.
       function fitDesktop() {
         document.documentElement.style.setProperty(
           '--desktop-scale',
