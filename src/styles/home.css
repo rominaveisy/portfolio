@@ -39,9 +39,6 @@ html:not(.motion-ready) [data-figma-id='214:504'] {
 .motion-skip:focus-visible {
   color: white;
 }
-.home-header {
-  background: #000c;
-}
 .project-list {
   max-width: 1440px;
   margin: auto;

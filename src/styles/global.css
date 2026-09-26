@@ -114,7 +114,8 @@ textarea,
   align-items: center;
   justify-content: space-between;
   color: #fff;
-  background: #000;
+  /* Shared translucent treatment: content stays visible, navigation stays readable. */
+  background: #000c;
   border-bottom: 1px solid #d7c0c03d;
 }
 .brand {
