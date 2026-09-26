@@ -1,0 +1,86 @@
+<form class="contact-form" aria-labelledby="form-title" data-contact-form>
+  <p class="form-eyebrow">01 / A NEW CONVERSATION</p>
+  <h2 id="form-title">
+    Tell me what
+    <br />
+    you’re thinking.
+  </h2>
+  <fieldset class="form-fields" disabled>
+    <legend class="sr-only">Your message</legend>
+    <label>
+      <span class="sr-only">Your name</span>
+      <input name="name" autocomplete="name" placeholder="Your name" required maxlength="100" />
+    </label>
+    <label>
+      <span class="sr-only">Email address</span>
+      <input
+        name="email"
+        type="email"
+        autocomplete="email"
+        placeholder="Email address"
+        required
+        maxlength="254"
+      />
+    </label>
+    <label class="message-field">
+      <span class="sr-only">What would you like to talk about?</span>
+      <textarea
+        name="message"
+        placeholder="What would you like to talk about?"
+        required
+        maxlength="2500"
+        rows="3"
+      ></textarea>
+      <img
+        class="resize-mark"
+        src="/images/contact/textarea-resize-affordance-280aa.svg"
+        width="11.547"
+        height="11.547"
+        alt=""
+        aria-hidden="true"
+      />
+    </label>
+  </fieldset>
+  <button type="submit" disabled>
+    Send message{' '}
+    <img
+      src="/images/contact/arrow-decorative-c5791.svg"
+      width="26.786"
+      height="21.916"
+      alt=""
+      aria-hidden="true"
+    />
+  </button>
+  <p class="form-help" id="mail-help">
+    Opens your email app. You review and send the message there.
+  </p>
+  <p class="form-status" role="status" hidden></p>
+  <noscript>
+    <p>
+      Please email <a href="mailto:rominaveisy.ar@gmail.com">rominaveisy.ar@gmail.com</a>.
+    </p>
+  </noscript>
+</form>
+<script>
+  import { buildMailto } from '../scripts/contact';
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    const data = new FormData(form);
+    const url = buildMailto(
+      String(data.get('name')),
+      String(data.get('email')),
+      String(data.get('message')),
+    );
+    const status = form.querySelector<HTMLParagraphElement>('.form-status')!;
+    status.hidden = false;
+    status.textContent =
+      'Your email app should open. If it does not, email rominaveisy.ar@gmail.com directly. Your message has not been sent yet.';
+    window.location.href = url;
+  });
+  if (form) {
+    form.querySelector('fieldset')!.disabled = false;
+    form.querySelector('button')!.disabled = false;
+  }
+</script>

@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Home from '../components/design/home.astro';
+import { projects } from '../data/projects';
+import '../styles/home.css';
+---
+
+<Layout
+  title="UX & Product Designer"
+  description="Romina Veisy designs experiences from the inside out. Explore her work in UX, product design, visual systems and motion."
+  active="work"
+  home
+>
+  <a class="motion-skip" href="#work" data-skip-motion>
+    Skip animation · View projects ↓
+  </a>
+  <section class="home-scroll" aria-label="Introduction and selected work">
+    <div class="home-viewport">
+      <div class="home-stage">
+        <Home />
+      </div>
+    </div>
+  </section>
+  <section class="project-list" id="work" aria-labelledby="work-title" tabindex="-1">
+    <div class="work-list-heading">
+      <p>SELECTED WORK</p>
+      <h2 id="work-title">From the inside out.</h2>
+    </div>
+    {projects.map((project) => (
+      <article class="project-card">
+        <div>
+          <p class="project-number">
+            {project.number} / {project.name.toUpperCase()}
+          </p>
+          <h3>{project.title}</h3>
+          <p class="project-description">{project.description}</p>
+          {project.status && <p class="project-status">{project.status}</p>}
+          <a class="project-cta" href={`/work/${project.slug}/`}>
+            Explore this work <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <img src={project.image} alt={project.alt} width="700" height="467" loading="lazy" />
+      </article>
+    ))}
+  </section>
+  <footer class="home-footer">
+    <p>Have something in mind?</p>
+    <a href="/contact/">Let’s talk ↗</a>
+    <a class="footer-cv" href="/documents/romina-veisy-cv.pdf" download="Romina-Veisy-CV.pdf">
+      Download CV ↗
+    </a>
+  </footer>
+</Layout>
+<script>
+  import '../scripts/home-motion';
+</script>

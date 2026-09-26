@@ -1,0 +1,32 @@
+---
+interface Props {
+  active?: 'work' | 'about' | 'contact' | 'cv';
+  home?: boolean;
+}
+const { active, home = false } = Astro.props;
+const links = [
+  { id: 'work', label: 'Work', href: '/#work' },
+  { id: 'about', label: 'About', href: '/about/' },
+  { id: 'contact', label: 'Contact', href: '/contact/' },
+  { id: 'cv', label: 'Get CV', href: '/cv/' },
+];
+---
+
+<header class:list={['site-header', { 'home-header': home }]}>
+  <a class="brand" href="/" aria-label="Romina Veisy — home">
+    R_V
+  </a>
+  <nav aria-label="Main navigation">
+    {links.map((link) => (
+      <a href={link.href} aria-current={active === link.id ? 'page' : undefined}>
+        {link.label}
+      </a>
+    ))}
+    <span class="studio" tabindex="0" aria-disabled="true" aria-describedby="studio-hint">
+      Studio
+      <span id="studio-hint" role="tooltip">
+        Coming soon
+      </span>
+    </span>
+  </nav>
+</header>

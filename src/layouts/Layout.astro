@@ -1,0 +1,62 @@
+---
+import Header from '../components/Header.astro';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/archivo';
+import '@fontsource-variable/source-serif-4';
+import '@fontsource-variable/source-serif-4/wght-italic.css';
+import '@fontsource-variable/newsreader';
+import '@fontsource-variable/newsreader/wght-italic.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '../styles/design.css';
+import '../styles/global.css';
+interface Props {
+  title: string;
+  description: string;
+  active?: 'work' | 'about' | 'contact' | 'cv';
+  home?: boolean;
+  noindex?: boolean;
+}
+const { title, description, active, home = false, noindex = false } = Astro.props;
+const production = import.meta.env.PUBLIC_SITE_ENV === 'production';
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <title>{title} — Romina Veisy</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={production && !noindex ? 'index, follow' : 'noindex, nofollow'} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${title} — Romina Veisy`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <script is:inline>
+      // Desktop reference geometry; mobile refinements will be reviewed separately.
+      function fitDesktop() {
+        document.documentElement.style.setProperty(
+          '--desktop-scale',
+          String(Math.min(1, window.innerWidth / 1707)),
+        );
+      }
+      fitDesktop();
+      window.addEventListener('resize', fitDesktop, { passive: true });
+    </script>
+  </head>
+  <body class:list={{ 'home-page': home }}>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <Header active={active} home={home} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+  </body>
+</html>

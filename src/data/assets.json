@@ -1,0 +1,692 @@
+[
+  {
+    "path": "/images/about/gallery-v2-image-mod01-1e688.jpg",
+    "width": 1600,
+    "height": 900,
+    "bytes": 112791
+  },
+  {
+    "path": "/images/about/gallery-v2-image-mod02-f0094.jpg",
+    "width": 1600,
+    "height": 900,
+    "bytes": 116179
+  },
+  {
+    "path": "/images/about/gallery-v2-image-mod03-1501f.jpg",
+    "width": 1600,
+    "height": 900,
+    "bytes": 94140
+  },
+  {
+    "path": "/images/about/gallery-v2-image-mod04-605cf.jpg",
+    "width": 1600,
+    "height": 1067,
+    "bytes": 147212
+  },
+  {
+    "path": "/images/about/gallery-v2-image-mod05-26b30.jpg",
+    "width": 1600,
+    "height": 1067,
+    "bytes": 161105
+  },
+  {
+    "path": "/images/about/gallery-v2-image-mod06-0a545.jpg",
+    "width": 1600,
+    "height": 933,
+    "bytes": 208914
+  },
+  {
+    "path": "/images/about/gallery-v2-image-mod07-eb0fb.jpg",
+    "width": 1600,
+    "height": 900,
+    "bytes": 251664
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pai01-11614.jpg",
+    "width": 1600,
+    "height": 857,
+    "bytes": 271715
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pai02-66247.jpg",
+    "width": 1600,
+    "height": 1100,
+    "bytes": 471783
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pai03-431c1.jpg",
+    "width": 1600,
+    "height": 1082,
+    "bytes": 328984
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pai04-4b23c.jpg",
+    "width": 1067,
+    "height": 1600,
+    "bytes": 397524
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pai05-1dcd7.jpg",
+    "width": 1067,
+    "height": 1600,
+    "bytes": 449046
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pai06-982d0.jpg",
+    "width": 1600,
+    "height": 1117,
+    "bytes": 526245
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pai07-8fdb5.jpg",
+    "width": 1600,
+    "height": 1013,
+    "bytes": 301701
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pai08-6065b.jpg",
+    "width": 1600,
+    "height": 938,
+    "bytes": 307629
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pai09-54576.jpg",
+    "width": 1600,
+    "height": 1141,
+    "bytes": 313769
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho01-6d866.jpg",
+    "width": 745,
+    "height": 496,
+    "bytes": 60561
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho02-3ea19.jpg",
+    "width": 1600,
+    "height": 1200,
+    "bytes": 572134
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho03-6028c.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 567618
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho04-e4a66.jpg",
+    "width": 1600,
+    "height": 1200,
+    "bytes": 467816
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho05-24cb9.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 402169
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho06-965a3.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 250815
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho07-9807b.jpg",
+    "width": 900,
+    "height": 1600,
+    "bytes": 817759
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho08-2cf12.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 432449
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho09-ad5e5.jpg",
+    "width": 1600,
+    "height": 1200,
+    "bytes": 556639
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho10-fd6a1.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 659014
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho11-b5448.jpg",
+    "width": 1600,
+    "height": 1130,
+    "bytes": 419453
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho12-8a7b8.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 494342
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho13-3fd06.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 407602
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho14-2ad44.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 354622
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho15-97a6f.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 436927
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho16-5297e.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 601026
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho17-95f3d.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 501617
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho18-37bd9.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 695543
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho19-e08a6.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 448221
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho20-dca91.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 718231
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho21-ed59b.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 564088
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho22-709b0.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 544298
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho23-b4f83.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 684420
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho24-41dd7.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 273963
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho25-70a7c.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 315206
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho26-8b368.jpg",
+    "width": 1600,
+    "height": 1200,
+    "bytes": 556764
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho27-4fe85.jpg",
+    "width": 1600,
+    "height": 1200,
+    "bytes": 858907
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho28-635a0.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 820245
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho29-58fd6.jpg",
+    "width": 1200,
+    "height": 1600,
+    "bytes": 166087
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho30-c21a8.jpg",
+    "width": 1600,
+    "height": 1067,
+    "bytes": 505923
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho31-849c2.jpg",
+    "width": 1600,
+    "height": 1067,
+    "bytes": 148409
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho32-bb67a.jpg",
+    "width": 1600,
+    "height": 1067,
+    "bytes": 382999
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho33-73c47.jpg",
+    "width": 1600,
+    "height": 1067,
+    "bytes": 396985
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho34-f6e0f.jpg",
+    "width": 1600,
+    "height": 1067,
+    "bytes": 396468
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho35-309c9.jpg",
+    "width": 1600,
+    "height": 1067,
+    "bytes": 217143
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho36-e8499.jpg",
+    "width": 1600,
+    "height": 1067,
+    "bytes": 288769
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho37-8f07a.jpg",
+    "width": 1600,
+    "height": 1067,
+    "bytes": 381851
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho38-cbe14.jpg",
+    "width": 1600,
+    "height": 1067,
+    "bytes": 151380
+  },
+  {
+    "path": "/images/about/gallery-v2-image-pho39-61f40.jpg",
+    "width": 1600,
+    "height": 1067,
+    "bytes": 256495
+  },
+  {
+    "path": "/images/about/portrait-original-black-and-white-unedited-1eebc.webp",
+    "width": 1117,
+    "height": 1408,
+    "bytes": 1273388
+  },
+  {
+    "path": "/images/contact/arrow-decorative-c5791.svg",
+    "width": 28,
+    "height": 23,
+    "bytes": 335
+  },
+  {
+    "path": "/images/contact/ivory-opening-editable-a3afb.svg",
+    "width": 150,
+    "height": 150,
+    "bytes": 286
+  },
+  {
+    "path": "/images/contact/orbit-editable-bezier-e413b.svg",
+    "width": 433,
+    "height": 251,
+    "bytes": 383
+  },
+  {
+    "path": "/images/contact/orbit-navy-point-30988.svg",
+    "width": 20,
+    "height": 20,
+    "bytes": 280
+  },
+  {
+    "path": "/images/contact/red-circle-editable-f74f1.svg",
+    "width": 616,
+    "height": 616,
+    "bytes": 1481
+  },
+  {
+    "path": "/images/contact/status-red-mark-c84bb.svg",
+    "width": 20,
+    "height": 20,
+    "bytes": 279
+  },
+  {
+    "path": "/images/contact/textarea-resize-affordance-280aa.svg",
+    "width": 12,
+    "height": 12,
+    "bytes": 347
+  },
+  {
+    "path": "/images/cv/original-cv-pdf-page1-75a5d.webp",
+    "width": 1240,
+    "height": 1754,
+    "bytes": 93414
+  },
+  {
+    "path": "/images/cyclointel/add-competitor-png-add-competitor-dialog-with-multi-select-value-chain-layer-checkboxes-899d0.webp",
+    "width": 1600,
+    "height": 714,
+    "bytes": 144712
+  },
+  {
+    "path": "/images/cyclointel/agents-png-agent-grid-with-success-rates-arate-limited-crawler-and-an-offline-patent-monit-3129a.webp",
+    "width": 1600,
+    "height": 714,
+    "bytes": 158534
+  },
+  {
+    "path": "/images/cyclointel/billing-png-cost-breakdown-listing-seven-services-totalling-about169-dollars-per-month-fca04.webp",
+    "width": 1600,
+    "height": 714,
+    "bytes": 140546
+  },
+  {
+    "path": "/images/cyclointel/competitors-png-final-competitors-page-with-tabs-for-hardware-positioning-data-and-insight-7779b.webp",
+    "width": 1600,
+    "height": 714,
+    "bytes": 188396
+  },
+  {
+    "path": "/images/cyclointel/digest-png-teams-digest-showing-the-top-three-insights-of-the-week-with-ateam-switcher-a58d4.webp",
+    "width": 1600,
+    "height": 714,
+    "bytes": 225898
+  },
+  {
+    "path": "/images/cyclointel/funnel-png-pipeline-status-showing4-sources248-scraped84-filtered84-scored12-routed7-publi-61dd6.webp",
+    "width": 1600,
+    "height": 714,
+    "bytes": 154586
+  },
+  {
+    "path": "/images/cyclointel/insights-png-final-insights-feed-headed-good-morning-heres-what-moved-today-with-four-stat-fc48f.webp",
+    "width": 1600,
+    "height": 714,
+    "bytes": 204442
+  },
+  {
+    "path": "/images/cyclointel/login-png-final-login-screen-combining-the-marketing-message-and-the-sign-in-form-on-one-p-b19b1.webp",
+    "width": 1600,
+    "height": 714,
+    "bytes": 847828
+  },
+  {
+    "path": "/images/cyclointel/profile-png-here-technologies-profile-with-tabs-for-overview-business-model-coverage-techn-dad59.webp",
+    "width": 1600,
+    "height": 714,
+    "bytes": 197322
+  },
+  {
+    "path": "/images/cyclointel/relevant-png-the-final-signal-card-actions-relevant-bookmark-and-share-47528.webp",
+    "width": 560,
+    "height": 279,
+    "bytes": 4474
+  },
+  {
+    "path": "/images/cyclointel/review-log-png-recently-reviewed-list-and-monthly-review-statistics-586a6.webp",
+    "width": 1600,
+    "height": 714,
+    "bytes": 197356
+  },
+  {
+    "path": "/images/cyclointel/review-queue-png-review-queue-with-two-pending-signals-flagged-high-impact-but-low-confide-ac6b9.webp",
+    "width": 1600,
+    "height": 714,
+    "bytes": 254780
+  },
+  {
+    "path": "/images/cyclointel/signals-png-two-signal-cards-with-why-it-matters-blocks-confidence-bars-and-source-links-d1455.webp",
+    "width": 1600,
+    "height": 714,
+    "bytes": 298650
+  },
+  {
+    "path": "/images/cyclointel/team-switch-png-account-menu-showing-aviewing-as-list-with-sales-product-engineering-strat-7d08b.webp",
+    "width": 1600,
+    "height": 714,
+    "bytes": 248560
+  },
+  {
+    "path": "/images/cyclointel/v1-dashboard-png-version1-dashboard-showing-competitor-updates-in-acard-grid-with-category-1ba0d.webp",
+    "width": 960,
+    "height": 684,
+    "bytes": 237276
+  },
+  {
+    "path": "/images/cyclointel/v1-landing-png-version1-landing-page-with-amarketing-headline-hero-image-and-aproduct-how--8bfe1.webp",
+    "width": 962,
+    "height": 685,
+    "bytes": 698688
+  },
+  {
+    "path": "/images/cyclointel/v1-login-png-version1-login-screen-with-street-level-imagery-and-capture-metadata-95c36.webp",
+    "width": 960,
+    "height": 684,
+    "bytes": 600046
+  },
+  {
+    "path": "/images/cyclointel/v1-stats-png-version1-quick-stats-row-including-time-saved2-h30-m-a7235.webp",
+    "width": 1110,
+    "height": 245,
+    "bytes": 74084
+  },
+  {
+    "path": "/images/cyclointel/v1-why-png-close-up-of-the-why-it-matters-block-from-version1-5e094.webp",
+    "width": 807,
+    "height": 243,
+    "bytes": 65004
+  },
+  {
+    "path": "/images/cyclointel/v2-charts-png-version2-lower-section-with-amarket-activity-chart-asignal-distribution-donu-8f83c.webp",
+    "width": 1600,
+    "height": 735,
+    "bytes": 198964
+  },
+  {
+    "path": "/images/cyclointel/v2-competitors-png-version2-competitors-page-with-threat-level-summary-tiles-filters-and-c-5865e.webp",
+    "width": 1600,
+    "height": 715,
+    "bytes": 272882
+  },
+  {
+    "path": "/images/cyclointel/v2-dashboard-png-version2-dashboard-with-five-large-metric-tiles-afeed-of-insights-and-aco-0de05.webp",
+    "width": 1600,
+    "height": 762,
+    "bytes": 298748
+  },
+  {
+    "path": "/images/home/circle-inner-if-this-is-the-small-circle-218cc.svg",
+    "width": 229,
+    "height": 229,
+    "bytes": 297
+  },
+  {
+    "path": "/images/home/circle-outer-if-this-is-the-large-circle-358b6.svg",
+    "width": 611,
+    "height": 608,
+    "bytes": 1500
+  },
+  {
+    "path": "/images/home/circle-outer.webp",
+    "width": 611,
+    "height": 608,
+    "bytes": 285838
+  },
+  {
+    "path": "/images/home/home-covers2026-copy-same-pivot-geometry-6520a.svg",
+    "width": 472,
+    "height": 472,
+    "bytes": 243
+  },
+  {
+    "path": "/images/home/pivot-point1-6ed35.svg",
+    "width": 44,
+    "height": 44,
+    "bytes": 236
+  },
+  {
+    "path": "/images/home/positioning-transparent1-a9b14.png",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 2833834
+  },
+  {
+    "path": "/images/home/report-to-resolution-transparent1-bda35.png",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 1538893
+  },
+  {
+    "path": "/images/home/signal-filter-transparent1-70d28.png",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 2635113
+  },
+  {
+    "path": "/images/positioning/cyclomedia-positioning-artwork-a5d08.png",
+    "width": 1536,
+    "height": 1024,
+    "bytes": 2833834
+  },
+  {
+    "path": "/images/positioning/signal-point-8d26e.svg",
+    "width": 8,
+    "height": 8,
+    "bytes": 245
+  },
+  {
+    "path": "/images/samenstad/auth-digid-professional-png-4df99.webp",
+    "width": 889,
+    "height": 1770,
+    "bytes": 754096
+  },
+  {
+    "path": "/images/samenstad/editable-sponsor-flow-connectors-6742b.svg",
+    "width": 992,
+    "height": 336,
+    "bytes": 554
+  },
+  {
+    "path": "/images/samenstad/final-activity-png-184a4.webp",
+    "width": 432,
+    "height": 874,
+    "bytes": 20872
+  },
+  {
+    "path": "/images/samenstad/final-create-bottom-png-17f14.webp",
+    "width": 427,
+    "height": 878,
+    "bytes": 32382
+  },
+  {
+    "path": "/images/samenstad/final-create-top-png-fc1d0.webp",
+    "width": 421,
+    "height": 876,
+    "bytes": 41524
+  },
+  {
+    "path": "/images/samenstad/final-detail-bottom-png-69775.webp",
+    "width": 422,
+    "height": 865,
+    "bytes": 26032
+  },
+  {
+    "path": "/images/samenstad/final-detail-top-png-a0f6d.webp",
+    "width": 422,
+    "height": 849,
+    "bytes": 25294
+  },
+  {
+    "path": "/images/samenstad/final-home-map-png-75c38.webp",
+    "width": 448,
+    "height": 859,
+    "bytes": 159920
+  },
+  {
+    "path": "/images/samenstad/final-nearby1-png-6c043.webp",
+    "width": 433,
+    "height": 880,
+    "bytes": 23394
+  },
+  {
+    "path": "/images/samenstad/final-nearby2-png-780ab.webp",
+    "width": 427,
+    "height": 829,
+    "bytes": 22480
+  },
+  {
+    "path": "/images/samenstad/final-profile-png-f29a1.webp",
+    "width": 426,
+    "height": 869,
+    "bytes": 23006
+  },
+  {
+    "path": "/images/samenstad/group-741c7.svg",
+    "width": 719,
+    "height": 219,
+    "bytes": 604
+  },
+  {
+    "path": "/images/samenstad/group1-a03cd.svg",
+    "width": 68,
+    "height": 220,
+    "bytes": 387
+  },
+  {
+    "path": "/images/samenstad/v1-create-png-2ff64.webp",
+    "width": 327,
+    "height": 366,
+    "bytes": 3834
+  },
+  {
+    "path": "/images/samenstad/v1-decision-png-c0385.webp",
+    "width": 333,
+    "height": 369,
+    "bytes": 7190
+  },
+  {
+    "path": "/images/samenstad/v1-detail-png-f8aa8.webp",
+    "width": 310,
+    "height": 469,
+    "bytes": 6230
+  },
+  {
+    "path": "/images/samenstad/v1-flow-png-ea936.webp",
+    "width": 1913,
+    "height": 805,
+    "bytes": 31106
+  },
+  {
+    "path": "/images/samenstad/v1-home-png-f123b.webp",
+    "width": 313,
+    "height": 483,
+    "bytes": 5524
+  },
+  {
+    "path": "/images/samenstad/v1-nearby-png-6c747.webp",
+    "width": 310,
+    "height": 409,
+    "bytes": 4634
+  }
+]

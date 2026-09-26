@@ -1,0 +1,167 @@
+{
+  "nodes": [
+    {
+      "nodeId": "214:476",
+      "nodeName": "Introduction",
+      "nodeType": "TEXT",
+      "codeSnippets": {
+        "css": "animation: kf_214_476_translate_0 38.238756s linear, kf_214_476_scale_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_476_translate_0 { 0% { translate: 0px 0px; } 31.382% { translate: 0px 0px; } 47.287% { translate: 0px -1286px; } 100% { translate: 0px -1286px; } } @keyframes kf_214_476_scale_0 { 0% { scale: 1 1; } 100% { scale: 1 1; } }"
+      }
+    },
+    {
+      "nodeId": "214:477",
+      "nodeName": "Circle — Outer if this is the large circle",
+      "nodeType": "ELLIPSE",
+      "codeSnippets": {
+        "css": "animation: kf_214_477_height_0 38.238756s linear, kf_214_477_width_0 38.238756s linear, kf_214_477_translate_0 38.238756s linear, kf_214_477_scale_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_477_height_0 { 0% { height: 608px; } 31.382% { height: 608px; } 47.413% { height: 1590.154px; } 100% { height: 1590.154px; } } @keyframes kf_214_477_width_0 { 0% { width: 611px; } 31.382% { width: 611px; } 47.413% { width: 1598px; } 100% { width: 1598px; } } @keyframes kf_214_477_translate_0 { 0% { translate: 0px 0px; } 31.382% { translate: 0px 0px; } 47.413% { translate: -1323px -421.077px; } 100% { translate: -1323px -421.077px; } } @keyframes kf_214_477_scale_0 { 0% { scale: 1 1; } 100% { scale: 1 1; } }"
+      }
+    },
+    {
+      "nodeId": "214:478",
+      "nodeName": "Circle — Inner if this is the small circle",
+      "nodeType": "ELLIPSE",
+      "codeSnippets": {
+        "css": "animation: kf_214_478_height_0 38.238756s linear, kf_214_478_width_0 38.238756s linear, kf_214_478_translate_0 38.238756s linear, kf_214_478_scale_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_478_height_0 { 0% { height: 229px; } 31.382% { height: 229px; } 47.496% { height: 622px; } 100% { height: 622px; } } @keyframes kf_214_478_width_0 { 0% { width: 229px; } 31.382% { width: 229px; } 47.496% { width: 622px; } 100% { width: 622px; } } @keyframes kf_214_478_translate_0 { 0% { translate: 0px 0px; } 31.382% { translate: 0px 0px; } 47.496% { translate: -1355px -127px; } 100% { translate: -1355px -127px; } } @keyframes kf_214_478_scale_0 { 0% { scale: 1 1; } 100% { scale: 1 1; } }"
+      }
+    },
+    {
+      "nodeId": "214:479",
+      "nodeName": "Headline",
+      "nodeType": "TEXT",
+      "codeSnippets": {
+        "css": "animation: kf_214_479_translate_0 38.238756s linear, kf_214_479_scale_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_479_translate_0 { 0% { translate: 0px 0px; } 31.382% { translate: 0px 0px; } 47.287% { translate: 0px -1286px; } 100% { translate: 0px -1286px; } } @keyframes kf_214_479_scale_0 { 0% { scale: 1 1; } 100% { scale: 1 1; } }"
+      }
+    },
+    {
+      "nodeId": "214:480",
+      "nodeName": "Name — Full",
+      "nodeType": "TEXT",
+      "codeSnippets": {
+        "css": "animation: kf_214_480_translate_0 38.238756s linear, kf_214_480_scale_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_480_translate_0 { 0% { translate: 0px 0px; } 31.382% { translate: 0px 0px; } 47.287% { translate: 0px -1286px; } 100% { translate: 0px -1286px; } } @keyframes kf_214_480_scale_0 { 0% { scale: 1 1; } 100% { scale: 1 1; } }"
+      }
+    },
+    {
+      "nodeId": "214:481",
+      "nodeName": "I design experiences",
+      "nodeType": "TEXT",
+      "codeSnippets": {
+        "css": "animation: kf_214_481_translate_0 38.238756s linear, kf_214_481_scale_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_481_translate_0 { 0% { translate: 0px 0px; } 31.382% { translate: 0px 0px; } 47.287% { translate: 0px -1286px; } 100% { translate: 0px -1286px; } } @keyframes kf_214_481_scale_0 { 0% { scale: 1 1; } 100% { scale: 1 1; } }"
+      }
+    },
+    {
+      "nodeId": "214:482",
+      "nodeName": "I start with how people think, feel and act—then bring that understanding to life through digital experiences, visual design and motion.",
+      "nodeType": "TEXT",
+      "codeSnippets": {
+        "css": "animation: kf_214_482_translate_0 38.238756s linear, kf_214_482_scale_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_482_translate_0 { 0% { translate: 0px 0px; } 31.382% { translate: 0px 0px; } 47.287% { translate: 0px -1286px; } 100% { translate: 0px -1286px; } } @keyframes kf_214_482_scale_0 { 0% { scale: 1 1; } 100% { scale: 1 1; } }"
+      }
+    },
+    {
+      "nodeId": "214:483",
+      "nodeName": "curve text",
+      "nodeType": "FRAME",
+      "codeSnippets": {
+        "css": "@property --rotate-transform { syntax: '<angle>'; initial-value: 0rad; inherits: false; } transform: rotate(var(--rotate-transform, 0rad)); animation: kf_214_483_rotate_0 38.238756s linear, kf_214_483_translate_0 38.238756s linear, kf_214_483_scale_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_483_rotate_0 { 0% { animation-timing-function: cubic-bezier(0, -0.008, 1, 0.989); --rotate-transform: 0rad; } 31.382% { --rotate-transform: -6.283rad; } 100% { --rotate-transform: -6.283rad; } } @keyframes kf_214_483_translate_0 { 0% { translate: 0px 0px; } 31.382% { translate: 0px 0px; } 47.287% { translate: 0px -1286px; } 100% { translate: 0px -1286px; } } @keyframes kf_214_483_scale_0 { 0% { scale: 1 1; } 100% { scale: 1 1; } }"
+      }
+    },
+    {
+      "nodeId": "214:503",
+      "fallbackNodeId": "387:328",
+      "nodeName": "Home covers — 2026 copy · same pivot geometry",
+      "nodeType": "INSTANCE",
+      "codeSnippets": {
+        "css": "@property --rotate-transform { syntax: '<angle>'; initial-value: 0rad; inherits: false; } transform: rotate(var(--rotate-transform, 1.571rad)); animation: kf_214_503_rotate_0 38.238756s linear, kf_214_503_translate_0 38.238756s linear, kf_214_503_scale_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_503_rotate_0 { 0% { --rotate-transform: 1.571rad; } 48.278% { animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1); --rotate-transform: 1.571rad; } 50.73% { animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1); --rotate-transform: 0rad; } 50.763% { animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1); --rotate-transform: 0rad; } 58.096% { animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1); --rotate-transform: -1.571rad; } 63.747% { --rotate-transform: -3.142rad; } 100% { --rotate-transform: -3.142rad; } } @keyframes kf_214_503_translate_0 { 0% { translate: 0px 0px; } 100% { translate: 0px 0px; } } @keyframes kf_214_503_scale_0 { 0% { scale: 1 1; } 100% { scale: 1 1; } }"
+      }
+    },
+    {
+      "nodeId": "214:504",
+      "nodeName": "pivot point1",
+      "nodeType": "FRAME",
+      "codeSnippets": {
+        "css": "@property --rotate-transform { syntax: '<angle>'; initial-value: 0rad; inherits: false; } transform: rotate(var(--rotate-transform, 1.765rad)); animation: kf_214_504_rotate_0 38.238756s linear, kf_214_504_translate_0 38.238756s linear, kf_214_504_scale_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_504_rotate_0 { 0% { --rotate-transform: 1.765rad; } 44.478% { animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1); --rotate-transform: 1.765rad; } 50.57% { animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1); --rotate-transform: 0.01rad; } 56.499% { animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1); --rotate-transform: -0.641rad; } 63.083% { --rotate-transform: -1.239rad; } 100% { --rotate-transform: -1.239rad; } } @keyframes kf_214_504_translate_0 { 0% { translate: 0px 0px; } 100% { translate: 0px 0px; } } @keyframes kf_214_504_scale_0 { 0% { scale: 1 1; } 100% { scale: 1 1; } }"
+      }
+    },
+    {
+      "nodeId": "214:506",
+      "nodeName": "Positioning  with Confidence active",
+      "nodeType": "TEXT",
+      "codeSnippets": {
+        "css": "animation: kf_214_506_opacity_0 38.238756s linear, kf_214_506_scale_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_506_opacity_0 { 0% { opacity: 0; } 62.429% { animation-timing-function: ease-in-out; opacity: 0; } 63.083% { opacity: 1; } 100% { opacity: 1; } } @keyframes kf_214_506_scale_0 { 0% { scale: 0.95 0.95; } 62.429% { animation-timing-function: ease-in-out; scale: 0.95 0.95; } 63.083% { scale: 1.15 1.15; } 100% { scale: 1.15 1.15; } }"
+      }
+    },
+    {
+      "nodeId": "214:507",
+      "nodeName": "Positioning  with Confidence default",
+      "nodeType": "TEXT",
+      "codeSnippets": {
+        "css": "animation: kf_214_507_opacity_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_507_opacity_0 { 0% { opacity: 1; } 62.429% { animation-timing-function: ease-in-out; opacity: 1; } 63.083% { opacity: 0; } 100% { opacity: 0; } }"
+      }
+    },
+    {
+      "nodeId": "214:508",
+      "nodeName": "Report to Resolution active",
+      "nodeType": "TEXT",
+      "codeSnippets": {
+        "css": "animation: kf_214_508_opacity_0 38.238756s linear, kf_214_508_scale_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_508_opacity_0 { 0% { opacity: 0; } 55.845% { animation-timing-function: ease-in-out; opacity: 0; } 56.499% { opacity: 1; } 62.429% { animation-timing-function: ease-in-out; opacity: 1; } 63.083% { opacity: 0; } 100% { opacity: 0; } } @keyframes kf_214_508_scale_0 { 0% { scale: 0.95 0.95; } 55.845% { animation-timing-function: ease-in-out; scale: 0.95 0.95; } 56.499% { scale: 1.15 1.15; } 62.429% { animation-timing-function: ease-in-out; scale: 1.15 1.15; } 63.083% { scale: 0.95 0.95; } 100% { scale: 0.95 0.95; } }"
+      }
+    },
+    {
+      "nodeId": "214:509",
+      "nodeName": "Report to Resolution default",
+      "nodeType": "TEXT",
+      "codeSnippets": {
+        "css": "animation: kf_214_509_opacity_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_509_opacity_0 { 0% { opacity: 1; } 55.845% { animation-timing-function: ease-in-out; opacity: 1; } 56.499% { opacity: 0; } 62.429% { animation-timing-function: ease-in-out; opacity: 0; } 63.083% { opacity: 1; } 100% { opacity: 1; } }"
+      }
+    },
+    {
+      "nodeId": "214:510",
+      "nodeName": "From Signals to Strategy active ",
+      "nodeType": "TEXT",
+      "codeSnippets": {
+        "css": "animation: kf_214_510_opacity_0 38.238756s linear, kf_214_510_scale_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_510_opacity_0 { 0% { opacity: 0; } 49.917% { animation-timing-function: ease-in-out; opacity: 0; } 50.57% { opacity: 1; } 55.845% { animation-timing-function: ease-in-out; opacity: 1; } 56.499% { opacity: 0; } 100% { opacity: 0; } } @keyframes kf_214_510_scale_0 { 0% { scale: 0.95 0.95; } 49.917% { animation-timing-function: ease-in-out; scale: 0.95 0.95; } 50.57% { scale: 1.15 1.15; } 55.845% { animation-timing-function: ease-in-out; scale: 1.15 1.15; } 56.499% { scale: 0.95 0.95; } 100% { scale: 0.95 0.95; } }"
+      }
+    },
+    {
+      "nodeId": "214:511",
+      "nodeName": "From Signals to Strategy default",
+      "nodeType": "TEXT",
+      "codeSnippets": {
+        "css": "animation: kf_214_511_opacity_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_511_opacity_0 { 0% { opacity: 1; } 49.917% { animation-timing-function: ease-in-out; opacity: 1; } 50.57% { opacity: 0; } 55.845% { animation-timing-function: ease-in-out; opacity: 0; } 56.499% { opacity: 1; } 100% { opacity: 1; } }"
+      }
+    },
+    {
+      "nodeId": "214:513",
+      "nodeName": "Home mark — R_V",
+      "nodeType": "TEXT",
+      "codeSnippets": {
+        "css": "animation: kf_214_513_opacity_0 38.238756s linear, kf_214_513_translate_0 38.238756s linear, kf_214_513_scale_0 38.238756s linear; animation-iteration-count: infinite; @keyframes kf_214_513_opacity_0 { 0% { opacity: 0; } 32.213% { animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1); opacity: 0; } 45.007% { opacity: 1; } 100% { opacity: 1; } } @keyframes kf_214_513_translate_0 { 0% { translate: 0px 0px; } 100% { translate: 0px 0px; } } @keyframes kf_214_513_scale_0 { 0% { scale: 1 1; } 100% { scale: 1 1; } }"
+      }
+    }
+  ],
+  "timelineCohorts": [
+    {
+      "rootNodeId": "214:475",
+      "durationMs": 38238.756,
+      "loopMode": "loop",
+      "memberNodeIds": [
+        "214:476",
+        "214:477",
+        "214:478",
+        "214:479",
+        "214:480",
+        "214:481",
+        "214:482",
+        "214:483",
+        "214:503",
+        "214:504",
+        "214:506",
+        "214:507",
+        "214:508",
+        "214:509",
+        "214:510",
+        "214:511",
+        "214:513"
+      ]
+    }
+  ]
+}
