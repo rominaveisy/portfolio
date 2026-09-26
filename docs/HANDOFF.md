@@ -1,5 +1,7 @@
 # Project handoff — Romina Veisy portfolio
 
+**Historical pre-launch handoff.** The responsive site has since been published at https://rominaveisy.com/. Start new work from `main` and read [LAUNCH.md](LAUNCH.md), [NEW_COMPUTER_REVIEW.md](NEW_COMPUTER_REVIEW.md) and the current README first. The original feature branch and decisions below remain preserved as reference; old pending-launch and branch-state statements are historical.
+
 Prepared on 26 September 2026 for continuing on another computer and in a new Codex task. Read this together with [the continuation prompt](CONTINUE_PROMPT.md), [README](../README.md), [design reference](design-reference.md), and [verification notes](review.md).
 
 ## 1. Start here: the correct repository and branch

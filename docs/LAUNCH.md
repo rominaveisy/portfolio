@@ -23,7 +23,23 @@ The owner explicitly requested updating the remote Git repository, deploying the
 
 ## Deployment status
 
-Prepared and locally verified. Remote push, Cloudflare version and live verification will be recorded after each succeeds.
+- **Live and verified:** https://rominaveisy.com/
+- Source commit: `5d888eb620e94977865d9ff74663e3e3057bfade`, pushed to both `main` and `codex/responsive-and-launch` before deployment.
+- Cloudflare version: `1b97e09f-0504-45b3-8d6b-983bce6e86ae`.
+- Deployment: `22052d6f-4eda-4642-8e07-f8af51382ed9`, serving 100% of traffic, created at `2026-09-26T20:45:54.224433Z`.
+- Version tag: `5d888eb`; release message: `production-launch-2026-09-26`.
+- Cloudflare confirms both custom domains are enabled with certificates. Interactive deployment completed without a conflicting DNS-record prompt.
+- Public verification passed on 26 September 2026, starting at `20:47:46 UTC`: seven routes, 123 assets/internal links, HTTPS, all three HTTP/www canonical redirects with encoded paths/queries, indexable page metadata, canonical URLs, robots/sitemap, security headers, original PDF hash, Home motion, responsive layouts, gallery, contact drafts, no-JavaScript fallback, true 404 and trailing-slash routing.
+- The first live run reached the final www check before encountering transient DNS propagation. Cloudflare and Google public DNS resolvers subsequently returned both hostnames, and the complete live verification passed on retry.
+- Ignored local verification artifacts: `.cache/production-qa/rominaveisy.com/` (report and screenshots).
+
+The subsequent documentation-only commit records these results; it does not change the deployed website bundle. The user-supplied `readme.txt` remains local and untracked. Original desktop history, artwork, CV and motion data are preserved.
+
+## Future updates and rollback
+
+Use `main` as the starting point. Review changes on a branch, run the checks described in README, save them to GitHub, then explicitly build production and deploy with the source commit as the Wrangler version tag. GitHub pushes alone do not deploy. Re-run `pnpm verify:production` after each release.
+
+To restore this known-good release after a later deployment, run `pnpm exec wrangler rollback 1b97e09f-0504-45b3-8d6b-983bce6e86ae`, then revert the faulty source change in Git. Do not erase history or alter unrelated domain/email settings.
 
 ## Remaining optional review
 

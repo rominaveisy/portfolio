@@ -1,6 +1,6 @@
 # Copy-paste continuation prompt
 
-Copy the text below into a new Codex task on the other computer. Ideally clone the repository's `feature/figma-desktop` branch and open its folder first. This prompt describes the intended future work; it does not authorize immediate production deployment or DNS changes.
+Copy the text below into a new Codex task on the other computer. Clone the repository's `main` branch and open its folder first. The site is live; this prompt does not independently authorize a new publication or DNS change.
 
 ---
 
@@ -10,15 +10,15 @@ I am continuing my existing Romina Veisy portfolio website from another computer
 
 Repository: https://github.com/rominaveisy/portfolio
 
-The completed desktop work and handoff are on **`feature/figma-desktop`**. **Do not start from `main`: at handoff, it contains only the initial README.** The last application-code checkpoint before the handoff documents was `8078210`; use the latest feature-branch tip, not that older commit alone.
+The responsive, published website is on **`main`**. The approved original desktop work remains on `feature/figma-desktop`, and the responsive release checkpoint is on `codex/responsive-and-launch`. Start from the current `main`, preserve history, and use `docs/LAUNCH.md` for the deployed source commit and Cloudflare version.
 
 If the project is not already available, help me clone the correct branch after checking installed tools and GitHub access. If a local checkout exists, inspect its branch, remote, Git status and uncommitted changes before changing anything. Preserve existing work. Do not assume the old Windows path or old Codex conversation exists here.
 
 Before implementation, read these repository files completely:
 
-1. `docs/HANDOFF.md` — full project state, decisions, setup, technical notes, remaining work, access and launch safeguards.
-2. `README.md` — commands, structure and prepared hosting plan.
-3. `docs/design-reference.md` and `docs/review.md` — approved frames and verification scope.
+1. `README.md`, `docs/LAUNCH.md` and `docs/NEW_COMPUTER_REVIEW.md` — current source, commands, published release, responsive work and verification limits.
+2. `docs/HANDOFF.md` — historical pre-launch state and preserved design/interaction decisions; do not treat old branch or pending-launch statements as current.
+3. `docs/design-reference.md` and `docs/review.md` — approved frames and original verification scope.
 4. `package.json`, `playwright.config.ts`, and relevant source/tests before editing.
 
 Then give me a concise explanation of what is already done, what remains, whether the baseline runs on this computer, and your proposed next step. Do not repeat the original discovery process or ask me to reconfirm decisions already documented unless there is a genuine conflict.
@@ -31,7 +31,7 @@ Figma: https://www.figma.com/design/l1FhtdExdrOfrwiPk6XeIj/Untitled?node-id=0-1
 
 The Figma design takes priority over the original written brief. My latest explicit decisions, summarized here and in the handoff, override older brief/prototype behavior. The approved Home frame is named “Home — Desktop Duplicate”; this is intentional.
 
-Seven pages already exist: Home, About, CycloIntel, Samenstad, Cyclomedia Positioning coming soon, Contact and CV. There is a 55-image About gallery, working original-PDF download, custom 404, metadata and preview-safe Cloudflare configuration. The website has **not** been deployed or launched.
+Seven pages are live: Home, About, CycloIntel, Samenstad, Cyclomedia Positioning coming soon, Contact and CV. The responsive website includes the 55-image gallery, original-PDF download, custom 404 and production metadata. Cloudflare serves https://rominaveisy.com/ and permanently redirects HTTP and www to that HTTPS apex. Deployment is manual through Wrangler; a GitHub push does not automatically publish.
 
 ## Preserve these approved behaviors
 
@@ -54,15 +54,14 @@ In another terminal run `pnpm check`, `pnpm test`, and `pnpm build`. Playwright 
 
 Normal builds need no secret environment variables or old `.cache` folder. Do not rerun the one-time Figma import/download/optimization scripts, edit generated `dist`, or upgrade major dependencies as part of the move. Use the existing organized structure and lockfile.
 
-## Remaining work through launch
+## Future work
 
-1. Reproduce the working desktop baseline and review any final desktop details with me. Save fresh screenshots for regression comparison.
-2. Complete proper tablet/mobile layouts **on a separate branch from the latest approved desktop feature-branch tip**, not from stale `main`. A suitable new branch name would be `codex/responsive-and-launch`. Keep the original desktop branch available and verify desktop behavior after responsive changes. The current small-screen Home fallback is not a finished mobile website.
-3. Obtain approval for a social-sharing image; finish content, accessibility, performance, real-device and Safari/Firefox checks. Do not invent project content or send a real test email without asking.
-4. With my account access, verify the current official Cloudflare deployment instructions and existing account/DNS state, then prepare an approved branch preview. The repository has Worker configuration, but no actual deployment/domain connection has been completed. Keep previews non-indexable; `noindex` is not privacy protection.
-5. After my explicit launch approval, review/merge the completed work to `main`, build production with indexing enabled, deploy to Cloudflare and connect `rominaveisy.com`. Review DNS before changes and preserve unrelated/email records. Verify HTTPS, www-to-apex redirect with paths/query strings, canonical URLs, sitemap/robots, CSP/security headers, all routes/404, CV/contact and the exact deployed commit.
-6. Give me clear maintenance/update/rollback instructions when the public site is genuinely verified.
+1. Reproduce the current site before making the newly requested changes. Preserve the approved desktop composition, original assets, CV and Home motion.
+2. Make updates on a fresh branch from current `main`. Mobile/tablet reflow is already implemented; do not restart it from the old desktop branch.
+3. Keep the owner's choice to test with installed Chrome only. Firefox/Safari, physical-device review and a custom social-sharing image remain optional outstanding work. Do not install browsers, invent artwork or send real email without the necessary instruction.
+4. Before an authorized publication, verify account access and the existing Worker/domain configuration. Do not replace unrelated DNS or email records. Keep local preview builds non-indexable.
+5. Follow README's production update commands and run `pnpm verify:production` after deployment. Record the exact source commit and Cloudflare version in `docs/LAUNCH.md`.
 
 `pnpm build` creates a non-indexable preview build; `pnpm build:production` creates an indexable production build. Neither command alone deploys. Do not launch, change DNS, force-push, discard changes, add paid services, or replace Cloudflare with another provider without the necessary explicit approval. Sign-in sessions do not transfer between computers; tell me precisely which access is needed at each step and let me sign in securely.
 
-Please start by inspecting the repository and reading the handoff, checking this computer's setup, and explaining your next step in plain language. Continue step by step toward a reviewed, responsive, safely launched site.
+Please start by inspecting the repository, current launch record and this computer's setup, then explain the next step for the change I request in plain language.
