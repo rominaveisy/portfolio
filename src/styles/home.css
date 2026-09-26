@@ -16,7 +16,7 @@ html:not(.motion-ready) [data-figma-id='214:504'] {
   position: absolute;
   left: 0;
   top: 50%;
-  width: 1707px;
+  width: var(--stage-width, 1707px);
   height: 1030px;
   transform: translateY(-50%) scale(var(--stage-scale, 0.75));
   transform-origin: left center;
@@ -135,6 +135,24 @@ html:not(.motion-ready) [data-figma-id='214:504'] {
 }
 .motion-ready [data-figma-id='214:483'] {
   animation: explore-spin 12s linear infinite;
+}
+.motion-ready
+  :is(
+    [data-figma-id='214:476'],
+    [data-figma-id='214:480'],
+    [data-figma-id='214:482'],
+    [data-figma-id='214:483']
+  ) {
+  margin-left: var(--intro-shift, 0px);
+}
+.motion-ready
+  :is(
+    [data-figma-id='214:477'],
+    [data-figma-id='214:478'],
+    [data-figma-id='214:479'],
+    [data-figma-id='214:481']
+  ) {
+  margin-left: var(--hero-shift, 0px);
 }
 .project-orbit {
   background: transparent;

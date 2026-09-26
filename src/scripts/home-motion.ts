@@ -24,6 +24,11 @@ let settleTimer = 0;
 let wheelTimer = 0;
 let wheelConsumed = false;
 let wheelDistance = 0;
+let lastWheelDelta = 0;
+let lastWheelDirection = 0;
+let settledAt = 0;
+let currentProgress = 0;
+let heroInset = 0;
 let touchStart: number | undefined;
 let touchConsumed = false;
 let targetScene = 0;
@@ -75,6 +80,8 @@ function makeAnimations() {
 }
 
 function update(progress: number) {
+  currentProgress = progress;
+  updateIntroSpacing(progress);
   for (const { animation, labels } of animations) {
     animation.currentTime = sequencePosition(progress, labels ? labelStops : coverStops) * 1000;
   }
@@ -120,6 +127,7 @@ function goToScene(index: number) {
     },
     onComplete: () => {
       transition = undefined;
+      settledAt = performance.now();
       window.scrollTo({ top, behavior: 'instant' });
       ScrollTrigger.update();
       if (trigger) update(trigger.progress);
@@ -148,6 +156,23 @@ function onWheel(event: WheelEvent) {
   const delta =
     event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? innerHeight : 1);
   if (!delta) return;
+  const amount = Math.abs(delta);
+  const direction = Math.sign(delta);
+  // A new wheel notch, renewed trackpad push, or reversal is intentional input,
+  // even if the preceding gesture's quiet timer has not elapsed yet.
+  const renewedInput =
+    !transition &&
+    (direction !== lastWheelDirection ||
+      (amount >= 8 && amount > lastWheelDelta * 1.6) ||
+      (amount >= 40 &&
+        Math.abs(amount - lastWheelDelta) < 0.1 &&
+        performance.now() - settledAt > 160));
+  lastWheelDelta = amount;
+  lastWheelDirection = direction;
+  if (renewedInput) {
+    wheelConsumed = false;
+    wheelDistance = 0;
+  }
   clearTimeout(wheelTimer);
   // A quiet interval separates intentional gestures from trailing trackpad inertia.
   wheelTimer = window.setTimeout(() => {
@@ -161,7 +186,6 @@ function onWheel(event: WheelEvent) {
   }
   if (Math.sign(delta) !== Math.sign(wheelDistance)) wheelDistance = 0;
   wheelDistance += delta;
-  const direction = Math.sign(delta);
   const atBoundary =
     (trigger!.progress < 0.001 && direction < 0) || (trigger!.progress > 0.999 && direction > 0);
   if (atBoundary) return;
@@ -206,11 +230,30 @@ function onTouchMove(event: TouchEvent) {
   }
 }
 
-function resize() {
-  stage.style.setProperty(
-    '--stage-scale',
-    String(Math.min(document.documentElement.clientWidth / 1707, window.innerHeight / 1030)),
+function updateIntroSpacing(progress: number) {
+  // The responsive intro offset returns to zero along the circle's original travel.
+  // Project-cover positions and rotation origins therefore stay unchanged.
+  const travel = Math.min(
+    1,
+    Math.max(
+      0,
+      (sequencePosition(progress, coverStops) - coverStops[0]) / (0.47413 - coverStops[0]),
+    ),
   );
+  stage.style.setProperty('--hero-shift', `${heroInset * (1 - travel)}px`);
+}
+
+function resize() {
+  const width = document.documentElement.clientWidth;
+  const scale = Math.min(width / 1707, window.innerHeight / 1030);
+  const extra = Math.max(0, width / scale - 1707);
+  // Split surplus width between the outer margins (one quarter each) and the gap.
+  // Moving the two columns independently avoids pushing the entire scene sideways.
+  heroInset = extra * 0.75;
+  stage.style.setProperty('--stage-scale', String(scale));
+  stage.style.setProperty('--stage-width', `${width / scale}px`);
+  stage.style.setProperty('--intro-shift', `${extra * 0.25}px`);
+  updateIntroSpacing(currentProgress);
 }
 
 function teardown() {
@@ -220,6 +263,8 @@ function teardown() {
   clearTimeout(wheelTimer);
   wheelConsumed = false;
   wheelDistance = 0;
+  lastWheelDelta = 0;
+  lastWheelDirection = 0;
   trigger?.kill();
   trigger = undefined;
   animations.forEach(({ animation }) => animation.cancel());
@@ -286,7 +331,8 @@ document.querySelector('[data-skip-motion]')?.addEventListener('click', (event) 
   work.scrollIntoView({ behavior: 'instant' });
   work.focus({ preventScroll: true });
 });
-window.addEventListener('wheel', onWheel, { passive: false });
+// Capture page-wide before text, artwork or navigation descendants can consume input.
+window.addEventListener('wheel', onWheel, { passive: false, capture: true });
 window.addEventListener('keydown', onKey);
 window.addEventListener('touchstart', onTouchStart, { passive: true });
 window.addEventListener('touchmove', onTouchMove, { passive: false });

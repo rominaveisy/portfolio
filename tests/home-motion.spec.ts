@@ -161,15 +161,23 @@ for (const size of [
   { width: 2560, height: 1080 },
 ]) {
   test(
-    'Wide Home at ' + size.width + 'px has no pivot art or horizontal offset',
+    'Wide Home at ' + size.width + 'px balances both columns without changing cover positions',
     async ({ page }) => {
       await page.setViewportSize(size);
       await page.goto('/');
       await scene(page, 'intro');
       await expect(page.locator('img[src*="pivot"]')).toHaveCount(0);
       expect((await page.locator('.home-stage').boundingBox())!.x).toBe(0);
-      const intro = (await page.locator('[data-figma-id="214:476"]').boundingBox())!;
-      expect(intro.x).toBeLessThan(100);
+      const intro = (await page.locator('[data-figma-id="214:482"]').boundingBox())!;
+      const circle = (await page.locator('[data-figma-id="214:477"]').boundingBox())!;
+      const headline = (await page.locator('[data-figma-id="214:481"]').boundingBox())!;
+      const rightMargin = size.width - circle.x - circle.width;
+      expect(intro.x).toBeGreaterThan(size.width * 0.07);
+      expect(intro.x).toBeLessThan(size.width * 0.12);
+      expect(Math.abs(intro.x - rightMargin)).toBeLessThan(12);
+      const gap = headline.x - intro.x - intro.width;
+      expect(gap).toBeGreaterThan(size.width * 0.1);
+      expect(gap).toBeLessThan(size.width * 0.23);
       expect(
         await page.locator('.project-orbit').evaluate((e) => getComputedStyle(e).backgroundColor),
       ).toBe('rgba(0, 0, 0, 0)');
@@ -180,9 +188,71 @@ for (const size of [
       await page.mouse.wheel(0, 40);
       await scene(page, 'cyclointel');
       const cta = (await page.locator('[data-project-link="cyclointel"]').boundingBox())!;
+      expect(cta.x).toBeCloseTo((370 * size.height) / 1030, 0);
       expect(cta.y).toBeGreaterThan(86);
       expect(cta.y + cta.height).toBeLessThan(size.height);
       await page.screenshot({ path: '.cache/qa/home-wide-cover-' + size.width + '.png' });
     },
   );
 }
+
+for (const targets of [
+  [
+    '[data-figma-id="214:480"]',
+    '[data-figma-id="214:482"]',
+    '[data-figma-id="214:477"]',
+    '[data-figma-id="214:478"]',
+  ],
+  ['.site-header nav a:first-child', '.studio', '[data-skip-motion]', 'empty space'],
+]) {
+  test('Scrolling works over ' + targets.join(', '), async ({ page }) => {
+    await page.setViewportSize({ width: 1900, height: 970 });
+    await page.goto('/');
+    await scene(page, 'intro');
+    for (const target of targets) {
+      if (target === 'empty space') await page.mouse.move(1880, 500);
+      else {
+        const box = (await page.locator(target).boundingBox())!;
+        await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+      }
+      await page.mouse.wheel(0, 40);
+      await scene(page, 'cyclointel');
+      await page.mouse.wheel(0, -40);
+      await scene(page, 'intro');
+    }
+  });
+}
+
+test('Fresh repeated wheel notches advance without requiring a pointer move or a pause', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await scene(page, 'intro');
+  await page.mouse.move(1200, 500);
+  await page.mouse.wheel(0, 120);
+  await page.evaluate(async () => {
+    for (let i = 0; i < 32; i++) {
+      await new Promise((resolve) => setTimeout(resolve, 75));
+      window.dispatchEvent(
+        new WheelEvent('wheel', { deltaY: 120, bubbles: true, cancelable: true }),
+      );
+    }
+  });
+  await scene(page, 'samenstad');
+  // Artwork, project text and the CTA also receive page-wide scroll handling.
+  const cta = (await page.locator('[data-project-link="samenstad"]').boundingBox())!;
+  await page.mouse.move(cta.x + 20, cta.y + 20);
+  await page.mouse.wheel(0, 40);
+  await scene(page, 'positioning');
+});
+
+test('A child element cannot create a wheel dead zone', async ({ page }) => {
+  await page.goto('/');
+  await scene(page, 'intro');
+  await page.locator('[data-figma-id="214:477"]').evaluate((e) => {
+    e.addEventListener('wheel', (event) => event.stopPropagation());
+  });
+  await page.mouse.move(1450, 620);
+  await page.mouse.wheel(0, 40);
+  await scene(page, 'cyclointel');
+});

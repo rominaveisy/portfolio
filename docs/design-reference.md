@@ -16,7 +16,9 @@ The active About content is `450:361`, footer `450:616`. Hidden backups are excl
 
 Motion values from Figma are retained in `src/data/home-motion.json`. Following the owner's latest correction, a scroll gesture triggers a complete transition to the next/previous cover. `home-motion.ts` animates native scroll between four stops and seeks the Figma tracks to match. Scrollbar movement also settles to a complete cover. Work and R_V reuse the same transition controller. The decorative “Scroll to explore” rotation is an independent, continuous CSS animation; its upward translation still follows the intro.
 
-The label-wheel stops are synchronized with the completed cover poses, rather than drifting toward the next label during a reading pause. Pivot construction graphics are omitted, but their invisible wrappers and transform origins remain. The Home stage is left-anchored and clipped to keep off-canvas geometry off screen, including on wide/short displays.
+The label-wheel stops are synchronized with the completed cover poses, rather than drifting toward the next label during a reading pause. Pivot construction graphics are omitted, but their invisible wrappers and transform origins remain. The Home stage is clipped to keep off-canvas geometry off screen. On wide/short displays, the introduction distributes surplus width between the outer margins and the space between its two columns. The circle's responsive offset returns to zero during its original transition, preserving the project covers' positions and rotation origins.
+
+Wheel input is captured at the window level, including over artwork, text, navigation and empty space. The gesture filter suppresses decaying trackpad momentum, while accepting a renewed push, direction reversal or repeated mouse-wheel notch after a transition, without requiring the pointer to move.
 
 The Home textured circle uses Figma’s export of that **individual ellipse**, avoiding inconsistent SVG grain rendering. It is not a screenshot of the page; page content remains interactive HTML.
 
