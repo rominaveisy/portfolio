@@ -71,7 +71,7 @@ Where pixel-identical WebP files replaced PNGs, the original PNGs remain locally
 - Skip animation and reduced-motion mode expose all three projects without motion.
 - Studio is not clickable; hover or keyboard focus shows “Coming soon.”
 - The third project links to its coming-soon page.
-- The Contact form opens an email draft. Visitors review and send it in their own email application. Nothing is sent or stored by this website; without JavaScript, use the email link.
+- Contact’s “Email me” and “Send message” open a chooser for Gmail, Outlook, or an installed email app. The form prepares an encoded draft, preserves the visitor’s fields, and provides a copyable backup if webmail sign-in drops the draft. Visitors review and send it in their own email account. Nothing is sent automatically or stored by this website. Without JavaScript, the form stays disabled and visible Gmail/Outlook links remain available.
 - Public contact details are `rominaveisy.ar@gmail.com`, `+31 6 2043 5932` and the confirmed LinkedIn profile.
 - The CV download is the unchanged original user-supplied PDF.
 - Gallery images open in a modal; Escape closes it and arrow keys change images.

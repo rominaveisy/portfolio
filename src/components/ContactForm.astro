@@ -1,4 +1,14 @@
-<form class="contact-form" aria-labelledby="form-title" data-contact-form>
+---
+import { buildComposeLinks, buildDraft } from '../scripts/contact';
+const emailLinks = buildComposeLinks(buildDraft());
+---
+
+<form
+  class="contact-form"
+  aria-labelledby="form-title"
+  aria-describedby="mail-help"
+  data-contact-form
+>
   <p class="form-eyebrow">01 / A NEW CONVERSATION</p>
   <h2 id="form-title">
     Tell me what
@@ -52,35 +62,21 @@
     />
   </button>
   <p class="form-help" id="mail-help">
-    Opens your email app. You review and send the message there.
+    Prepares an email draft. Choose Gmail, Outlook, or your email app, then review and send it
+    there.
   </p>
-  <p class="form-status" role="status" hidden></p>
   <noscript>
     <p>
-      Please email <a href="mailto:rominaveisy.ar@gmail.com">rominaveisy.ar@gmail.com</a>.
+      Email rominaveisy.ar@gmail.com using
+      <a href={emailLinks.gmail} target="_blank" rel="noopener noreferrer">
+        Gmail
+      </a>
+      ,
+      <a href={emailLinks.outlook} target="_blank" rel="noopener noreferrer">
+        Outlook
+      </a>
+      , or
+      <a href="mailto:rominaveisy.ar@gmail.com">your email app</a>.
     </p>
   </noscript>
 </form>
-<script>
-  import { buildMailto } from '../scripts/contact';
-  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
-  form?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    if (!form.reportValidity()) return;
-    const data = new FormData(form);
-    const url = buildMailto(
-      String(data.get('name')),
-      String(data.get('email')),
-      String(data.get('message')),
-    );
-    const status = form.querySelector<HTMLParagraphElement>('.form-status')!;
-    status.hidden = false;
-    status.textContent =
-      'Your email app should open. If it does not, email rominaveisy.ar@gmail.com directly. Your message has not been sent yet.';
-    window.location.href = url;
-  });
-  if (form) {
-    form.querySelector('fieldset')!.disabled = false;
-    form.querySelector('button')!.disabled = false;
-  }
-</script>

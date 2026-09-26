@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Contact from '../components/design/contact.astro';
+import ContactComposer from '../components/ContactComposer.astro';
+import '../styles/contact.css';
 ---
 
 <Layout
@@ -12,7 +14,11 @@ import Contact from '../components/design/contact.astro';
     <Contact />
   </div>
   <p class="contact-direct">
-    Email <a href="mailto:rominaveisy.ar@gmail.com">rominaveisy.ar@gmail.com</a>{' '}
+    Email{' '}
+    <a href="mailto:rominaveisy.ar@gmail.com" data-email-options>
+      rominaveisy.ar@gmail.com
+    </a>{' '}
     <span aria-hidden="true">·</span> Phone <a href="tel:+31620435932">+31 6 2043 5932</a>
   </p>
+  <ContactComposer />
 </Layout>

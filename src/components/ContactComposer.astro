@@ -1,0 +1,61 @@
+---
+import { CONTACT_EMAIL, buildComposeLinks, buildDraft } from '../scripts/contact';
+const links = buildComposeLinks(buildDraft());
+---
+
+<dialog
+  class="email-dialog"
+  aria-labelledby="email-dialog-title"
+  aria-describedby="email-dialog-help"
+>
+  <div class="email-dialog-heading">
+    <h2 id="email-dialog-title">Choose how to email me</h2>
+    <button type="button" data-close-email aria-label="Close email options">
+      ✕
+    </button>
+  </div>
+  <p id="email-dialog-help">
+    Open a draft in your preferred email service. You may need to sign in, then review and send it
+    there. Nothing has been sent yet.
+  </p>
+  <p class="email-recipient">
+    To: <strong>{CONTACT_EMAIL}</strong>
+  </p>
+  <div class="email-options">
+    <a
+      href={links.gmail}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-email-provider="gmail"
+      autofocus
+    >
+      Open Gmail ↗
+    </a>
+    <a href={links.outlook} target="_blank" rel="noopener noreferrer" data-email-provider="outlook">
+      Open Outlook ↗
+    </a>
+    <a href={links.mailto} data-email-provider="mailto">
+      Use my email app ↗
+    </a>
+  </div>
+  <p class="email-handoff-help" data-email-handoff role="status"></p>
+  <div class="email-copy">
+    <label for="email-draft-copy" data-copy-label>
+      Recipient
+    </label>
+    <textarea
+      id="email-draft-copy"
+      data-email-draft
+      readonly
+      rows="2"
+      spellcheck="false"
+    >{CONTACT_EMAIL}</textarea>
+    <button type="button" data-copy-email>
+      Copy email address
+    </button>
+    <p data-copy-status role="status"></p>
+  </div>
+</dialog>
+<script>
+  import '../scripts/contact-ui';
+</script>
