@@ -14,12 +14,13 @@ html:not(.motion-ready) [data-figma-id='214:504'] {
 }
 .home-stage {
   position: absolute;
-  left: 50%;
+  left: 0;
   top: 50%;
   width: 1707px;
   height: 1030px;
-  transform: translate(-50%, -50%) scale(var(--stage-scale, 0.75));
-  transform-origin: center;
+  transform: translateY(-50%) scale(var(--stage-scale, 0.75));
+  transform-origin: left center;
+  overflow: clip;
 }
 [data-design-page='home'] {
   height: 1030px !important;
@@ -126,14 +127,22 @@ html:not(.motion-ready) [data-figma-id='214:504'] {
   display: none;
 }
 .motion-ready .home-scroll {
-  height: 720svh;
+  height: 400svh;
 }
 .motion-ready .home-viewport {
   position: sticky;
   top: 0;
 }
-.motion-ready .home-stage {
-  will-change: transform;
+.motion-ready [data-figma-id='214:483'] {
+  animation: explore-spin 12s linear infinite;
+}
+.project-orbit {
+  background: transparent;
+}
+@keyframes explore-spin {
+  to {
+    rotate: -360deg;
+  }
 }
 .motion-ready [data-project-link] {
   transition: background-color 0.15s;

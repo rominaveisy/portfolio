@@ -45,51 +45,6 @@ for (const path of paths) {
   });
 }
 
-test('Home follows scroll position, pauses and reverses', async ({ page }) => {
-  await page.goto('/');
-  await expect(page.locator('html')).toHaveClass(/motion-ready/);
-  const seek = async (progress: number) => {
-    await page.evaluate((p) => {
-      const area = document.querySelector('.home-scroll')!;
-      window.scrollTo(0, (area.getBoundingClientRect().height - innerHeight) * p);
-    }, progress);
-    await page.waitForFunction(
-      (p) =>
-        Math.abs(
-          Number((document.querySelector('.home-stage') as HTMLElement).dataset.progress) - p,
-        ) < 0.002,
-      progress,
-    );
-  };
-  const position = () =>
-    page
-      .locator('[data-figma-id="214:477"]')
-      .evaluate((e) => ({
-        width: getComputedStyle(e).width,
-        translate: getComputedStyle(e).translate,
-      }));
-  await seek(0.24);
-  const middle = await position();
-  await page.waitForTimeout(300);
-  expect(await position()).toEqual(middle);
-  await seek(0.52);
-  expect(await position()).not.toEqual(middle);
-  await expect(page.locator('[data-project-link="cyclointel"]')).toHaveAttribute('tabindex', '0');
-  await page.screenshot({ path: '.cache/qa/home-cyclointel.png' });
-  await seek(0.75);
-  await page.screenshot({ path: '.cache/qa/home-samenstad.png' });
-  await seek(0.98);
-  await page.screenshot({ path: '.cache/qa/home-positioning.png' });
-  await expect(page.locator('[data-project-link="positioning"]')).toHaveAttribute(
-    'href',
-    '/work/positioning/',
-  );
-  await seek(0.24);
-  expect(await position()).toEqual(middle);
-  await seek(0);
-  await page.screenshot({ path: '.cache/qa/home.png' });
-});
-
 test('Work navigation enters the first project; skip shows every project', async ({ page }) => {
   await page.goto('/#work');
   await expect(page.locator('[data-project-link="cyclointel"]')).toHaveAttribute('tabindex', '0');

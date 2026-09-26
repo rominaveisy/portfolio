@@ -65,8 +65,9 @@ Where pixel-identical WebP files replaced PNGs, the original PNGs remain locally
 
 ## Agreed interactions
 
-- Work returns to the first project on Home.
-- Home follows scroll position: down advances, stop pauses, up reverses. No autoplay or looping. The reading intervals should be reviewed by the owner.
+- On Home, Work animates to the first project and R_V animates back to the introduction, without reloading.
+- One scroll gesture completes one Home transition: down advances to the next cover, up returns to the previous cover. Trackpad momentum is consumed until the gesture ends. Scrollbar movement settles to the nearest complete cover; the last cover allows normal scrolling to the footer. Arrow/Page keys and Space also move between covers.
+- “Scroll to explore” continuously rotates while the intro is visible and travels upward with the intro. The project sequence itself does not autoplay.
 - Skip animation and reduced-motion mode expose all three projects without motion.
 - Studio is not clickable; hover or keyboard focus shows “Coming soon.”
 - The third project links to its coming-soon page.

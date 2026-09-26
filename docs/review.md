@@ -5,10 +5,11 @@
 - Seven approved desktop routes and the custom 404 screen build successfully.
 - Astro/TypeScript check: zero errors and zero warnings.
 - Local Cloudflare Worker verification passes: seven routes, Content Security Policy, search/security headers, working scripts, 404 status and trailing-slash redirect with query preservation. This is local emulation, not a cloud deployment.
-- 20 browser tests pass in Chrome, including 1280px and 1440px laptop widths.
+- 28 browser tests pass in Chrome, including 1280px and 1440px laptop widths, plus 1900px and 2560px wide Home layouts.
 - All page images have local, nonempty rendered slots; internal links and assets return successfully.
-- Home motion advances with scroll position, remains unchanged while stopped, and returns to the same state when scrolled back.
-- Work opens the first project; the third project links to its coming-soon page.
+- One Home scroll gesture completes a transition to the next/previous cover. Native scrollbar input settles to a cover; trackpad inertia does not skip another cover. Keyboard navigation, resize settling, and normal scrolling out to the footer are covered by regression tests.
+- Work and R_V animate forward/backward on Home, without a reload or immediate jump. The third project links to its coming-soon page.
+- Pivot construction graphics are removed and the Home stage is left-aligned/clipped. “Scroll to explore” rotates continuously, then exits upward with the intro.
 - The 55-image gallery opens, changes images, closes with Escape and restores keyboard focus.
 - Contact fields are labelled and required. The email draft encodes visitor input, and the no-JavaScript form is disabled with an email fallback.
 - Studio is not a link; its keyboard/hover hint works.

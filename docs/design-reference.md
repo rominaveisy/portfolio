@@ -14,7 +14,9 @@
 
 The active About content is `450:361`, footer `450:616`. Hidden backups are excluded. The gallery has 39 photographs, 9 paintings and 7 physical models.
 
-Motion values from Figma are retained in `src/data/home-motion.json`. The website drives them from scroll position, following the user's correction rather than the prototype's time-based loop. `home-motion.ts` maps progress and keeps every animation paused; no independent animation clock runs.
+Motion values from Figma are retained in `src/data/home-motion.json`. Following the owner's latest correction, a scroll gesture triggers a complete transition to the next/previous cover. `home-motion.ts` animates native scroll between four stops and seeks the Figma tracks to match. Scrollbar movement also settles to a complete cover. Work and R_V reuse the same transition controller. The decorative “Scroll to explore” rotation is an independent, continuous CSS animation; its upward translation still follows the intro.
+
+The label-wheel stops are synchronized with the completed cover poses, rather than drifting toward the next label during a reading pause. Pivot construction graphics are omitted, but their invisible wrappers and transform origins remain. The Home stage is left-anchored and clipped to keep off-canvas geometry off screen, including on wide/short displays.
 
 The Home textured circle uses Figma’s export of that **individual ellipse**, avoiding inconsistent SVG grain rendering. It is not a screenshot of the page; page content remains interactive HTML.
 
