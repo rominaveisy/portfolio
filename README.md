@@ -2,6 +2,19 @@
 
 Astro, CSS and JavaScript, built from the approved Figma desktop designs. The design takes priority over the original brief wherever they conflict.
 
+## Continuing on another computer
+
+Start with the [complete project handoff](docs/HANDOFF.md) and [copy-paste prompt for the next Codex task](docs/CONTINUE_PROMPT.md). They record the latest owner decisions, setup, verification limits and remaining work through launch.
+
+**Clone `feature/figma-desktop`, not `main`: `main` still contains only the initial README at this handoff.**
+
+```sh
+git clone --branch feature/figma-desktop https://github.com/rominaveisy/portfolio.git
+cd portfolio
+```
+
+The tracked source, assets, motion data and original CV are sufficient for a normal install/build. The old computer's folders, caches and sign-in sessions are not required or transferred.
+
 ## Current stage
 
 The desktop review build is on `feature/figma-desktop`. `main` is unchanged. All seven screens, the 55-image About gallery, scroll-controlled Home, email-draft form and original CV are implemented.
@@ -65,6 +78,7 @@ Where pixel-identical WebP files replaced PNGs, the original PNGs remain locally
 
 ## Agreed interactions
 
+- Home's introduction reads “I’m Romina Veisy” / “a creative UX & visual designer.” All pages share Home's fixed translucent header so content remains visible behind it.
 - On Home, Work animates to the first project and R_V animates back to the introduction, without reloading.
 - One scroll gesture completes one Home transition: down advances to the next cover, up returns to the previous cover. Decaying trackpad momentum is filtered, but fresh wheel input is accepted after each transition without moving the pointer. Scrolling works over text, artwork, navigation and empty space. Scrollbar movement settles to the nearest complete cover; the last cover allows normal scrolling to the footer. Arrow/Page keys and Space also move between covers.
 - “Scroll to explore” continuously rotates while the intro is visible and travels upward with the intro. The project sequence itself does not autoplay.
@@ -79,6 +93,8 @@ Where pixel-identical WebP files replaced PNGs, the original PNGs remain locally
 ## Safe updates
 
 A **branch** is a separate line of changes. A **commit** is a saved checkpoint. A **pull request** is a review before changes enter `main`.
+
+**Current pre-launch exception:** start the responsive branch from the latest approved `feature/figma-desktop` commit. Do not use the initial-README `main` as the baseline. The general workflow below applies after the finished website has been reviewed and merged into `main`.
 
 1. Update local `main` from GitHub, with no unsaved changes left behind.
 2. Create a descriptively named branch.
@@ -98,7 +114,9 @@ Passwords and two-factor codes belong in the services’ own sign-in pages, neve
 
 After design approval:
 
-1. Sign into Cloudflare directly and connect the private `rominaveisy/portfolio` repository to a Worker.
+This is a prepared plan, not an existing deployment. Recheck current official Cloudflare documentation and the actual account/DNS state before applying it. Do not use `main` as production until the finished website has been approved and merged there.
+
+1. Sign into Cloudflare directly and connect the `rominaveisy/portfolio` repository to a Worker.
 2. Choose `main` as production and enable preview builds for other branches.
 3. Set the build command to `pnpm build` (preview-safe).
 4. Set the **production** deploy command to `pnpm build:production && pnpm exec wrangler deploy`. The explicit second build enables indexing only for production.

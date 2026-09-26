@@ -24,4 +24,8 @@ The Home textured circle uses Figma’s export of that **individual ellipse**, a
 
 Desktop artboards retain the 1707px reference geometry, proportionally fitted on smaller laptops. Case studies use the 1120px editorial column. Full responsive reflow belongs to a separate next-stage branch after desktop approval.
 
-Owner review: Home scroll pacing, visual agreement, form expectations and coming-soon presentation. A social-sharing image is still awaiting approval; none was invented.
+The latest Home copy is “I’m Romina Veisy” / “a creative UX & visual designer.” All routes share Home's fixed translucent header (`rgba(0, 0, 0, 0.8)`), including after scrolling.
+
+Contact's agreed behavior is a visible Gmail/Outlook/email-app draft chooser with copy fallbacks, not direct website sending. The Figma form is retained, overriding the original brief's instruction to omit a form.
+
+Owner review still covers Home scroll pacing, visual agreement and coming-soon presentation. A social-sharing image is still awaiting approval; none was invented. See [HANDOFF.md](HANDOFF.md) for all latest decisions and the responsive/launch sequence.
