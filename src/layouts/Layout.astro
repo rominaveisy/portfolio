@@ -34,6 +34,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="robots" content={production && !noindex ? 'index, follow' : 'noindex, nofollow'} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="96x96" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={`${title} — Romina Veisy`} />
     <meta property="og:description" content={description} />

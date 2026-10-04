@@ -97,6 +97,8 @@ function update(progress: number) {
   stage.dataset.progress = progress.toFixed(5);
   stage.dataset.scene = settled ? active : 'transition';
   stage.dataset.moving = String(!settled);
+  // Fade the curved label in with the first cover and out on the return to the intro.
+  stage.style.setProperty('--work-label-opacity', String(Math.min(1, Math.max(0, progress * 3))));
 }
 
 function sceneScroll(index: number) {

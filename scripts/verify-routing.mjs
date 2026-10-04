@@ -16,6 +16,10 @@ for (const origin of [
     });
     assert.equal(response.status, 301);
     assert.equal(response.headers.get('location'), 'https://rominaveisy.com' + path);
+    assert.equal(
+      response.headers.get('strict-transport-security'),
+      origin.startsWith('https:') ? 'max-age=86400' : null,
+    );
   }
 }
 for (const origin of ['https://rominaveisy.com', 'http://127.0.0.1:8787']) {
@@ -29,8 +33,20 @@ for (const origin of ['https://rominaveisy.com', 'http://127.0.0.1:8787']) {
       },
     },
   });
-  assert.equal(response, assetResponse);
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get('x-test'), 'preserved');
+  assert.equal(await response.text(), 'asset response');
+  assert.equal(
+    response.headers.get('strict-transport-security'),
+    origin.startsWith('https:') ? 'max-age=86400' : null,
+  );
 }
+const missing = await worker.fetch(new Request('https://rominaveisy.com/missing/'), {
+  ASSETS: { fetch: () => new Response('Not found', { status: 404 }) },
+});
+assert.equal(missing.status, 404);
+assert.equal(await missing.text(), 'Not found');
+assert.equal(missing.headers.get('strict-transport-security'), 'max-age=86400');
 console.log(
-  'Canonical HTTP/www redirects preserve paths and queries; HTTPS and local requests preserve asset responses.',
+  'Canonical redirects preserve paths and queries; HTTPS policy covers both public hosts; asset bodies, status codes and headers are preserved.',
 );

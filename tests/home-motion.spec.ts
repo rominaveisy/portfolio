@@ -10,11 +10,13 @@ test('One small gesture completes each cover and reverses without stopping halfw
 }) => {
   await page.goto('/');
   await scene(page, 'intro');
+  await expect(page.locator('.work-arc')).toHaveCSS('opacity', '0');
   await page.screenshot({ path: '.cache/qa/home.png' });
   for (const name of ['cyclointel', 'samenstad', 'positioning']) {
     await page.mouse.wheel(0, 40);
     await scene(page, 'transition');
     await scene(page, name);
+    await expect(page.locator('.work-arc')).toHaveCSS('opacity', '1');
     await expect(page.locator('[data-project-link="' + name + '"]')).toHaveAttribute(
       'tabindex',
       '0',
@@ -30,6 +32,7 @@ test('One small gesture completes each cover and reverses without stopping halfw
     await scene(page, name);
   }
   await expect(page.locator('[data-project-link][tabindex="0"]')).toHaveCount(0);
+  await expect(page.locator('.work-arc')).toHaveCSS('opacity', '0');
 });
 
 test('A long trackpad gesture lands on only one cover', async ({ page }) => {
@@ -56,6 +59,25 @@ test('A long trackpad gesture lands on only one cover', async ({ page }) => {
   await page.waitForTimeout(250);
   await page.mouse.wheel(0, 40);
   await scene(page, 'samenstad');
+});
+
+test('Enlarged illustrations stay fully inside narrow and wide desktop covers', async ({
+  page,
+}) => {
+  for (const width of [1024, 1440, 1900]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    await scene(page, 'intro');
+    for (const name of ['cyclointel', 'samenstad', 'positioning']) {
+      await page.mouse.wheel(0, 40);
+      await scene(page, name);
+      const art = (await page.locator(`[data-project-art="${name}"]`).boundingBox())!;
+      expect(art.x).toBeGreaterThan(0);
+      expect(art.x + art.width).toBeLessThan(width - 10);
+      expect(art.y).toBeGreaterThan(60);
+      expect(art.y + art.height).toBeLessThan(900);
+    }
+  }
 });
 
 test('Work and R_V play the same motion without reloading Home', async ({ page }) => {

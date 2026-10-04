@@ -90,14 +90,14 @@ test('Contact draft is encoded safely and fields are labelled and required', asy
   await expect(page.locator('a[href="tel:+31620435932"]')).toBeVisible();
 });
 
-test('CV serves the unchanged original PDF', async ({ request }) => {
+test('CV serves the reviewed October 2026 PDF', async ({ request }) => {
   const response = await request.get('/documents/romina-veisy-cv.pdf');
   expect(response.status()).toBe(200);
   expect(
     createHash('sha256')
       .update(await response.body())
       .digest('hex'),
-  ).toBe('99bdc7aa994832299762e10ea75d3a93e0073e53831b4539d7a4a65d3d3dfd79');
+  ).toBe('2912592dbfba320538d26f7fc58f321215b062109bd76768675fa2be67f69e81');
 });
 
 test('Studio is a non-link with a keyboard-accessible coming-soon hint', async ({ page }) => {

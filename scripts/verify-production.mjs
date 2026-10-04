@@ -35,6 +35,9 @@ try {
     assert.match(headers['content-security-policy'], /script-src 'self' 'sha256-/);
     assert.equal(headers['x-content-type-options'], 'nosniff');
     assert.equal(headers['x-frame-options'], 'DENY');
+    if (base === 'https://rominaveisy.com') {
+      assert.equal(headers['strict-transport-security'], 'max-age=86400');
+    }
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'index, follow');
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       'href',
@@ -43,7 +46,7 @@ try {
     await expect(page.locator('main h1')).toHaveCount(1);
     await page.evaluate(() => document.fonts.ready);
     const urls = await page
-      .locator('img[src], script[src], link[rel="stylesheet"], a[href^="/"]')
+      .locator('img[src], script[src], link[rel="stylesheet"], link[rel="icon"], a[href^="/"]')
       .evaluateAll((elements) =>
         elements
           .map((element) => element.getAttribute('src') || element.getAttribute('href'))
@@ -51,10 +54,15 @@ try {
       );
     for (const url of urls) if (url.startsWith('/')) resources.add(url.split('#')[0] || '/');
     if (route === '/') {
+      await expect(page).toHaveTitle('a creative UX/UI & visual designer — Romina Veisy');
+      await expect(page.locator('[data-figma-id="214:476"]')).toContainText(
+        'a creative UX/UI & visual designer',
+      );
       await expect(page.locator('html')).toHaveClass(/motion-ready/);
       await page.mouse.move(700, 500);
       await page.mouse.wheel(0, 600);
       await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', 'cyclointel');
+      await expect(page.locator('.work-arc')).toHaveCSS('opacity', '1');
     }
     for (const width of [320, 390, 768, 1440]) {
       await page.setViewportSize({ width, height: 900 });
@@ -81,7 +89,7 @@ try {
     createHash('sha256')
       .update(await pdf.body())
       .digest('hex'),
-    '99bdc7aa994832299762e10ea75d3a93e0073e53831b4539d7a4a65d3d3dfd79',
+    '2912592dbfba320538d26f7fc58f321215b062109bd76768675fa2be67f69e81',
   );
 
   await page.setViewportSize({ width: 390, height: 844 });
@@ -162,6 +170,9 @@ try {
         maxRedirects: 0,
       });
       assert.equal(response.status(), 301, origin);
+      if (origin.startsWith('https:')) {
+        assert.equal(response.headers()['strict-transport-security'], 'max-age=86400');
+      }
       assert.equal(
         response.headers().location,
         'https://rominaveisy.com/about/?from=launch&message=a%20b',
@@ -172,7 +183,7 @@ try {
   await writeFile(`${output}/report.json`, JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
   console.log(
-    'Production routing, indexing, security headers, assets, original PDF, motion, responsive layouts, gallery, contact drafts and no-JavaScript fallback passed. No email sent.',
+    'Production routing, indexing, security headers, assets, updated PDF, motion, responsive layouts, gallery, contact drafts and no-JavaScript fallback passed. No email sent.',
   );
 } finally {
   await browser.close();

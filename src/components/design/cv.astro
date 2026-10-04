@@ -12,16 +12,39 @@
   </a>
   <div data-figma-id="438:370" class="d-cfbda2b11">
     <img
-      alt="Romina Veisy — CV, September 2026. Download the accessible PDF using the button above."
-      src="/images/cv/original-cv-pdf-page1-75a5d.webp"
-      width="1240"
-      height="1754"
+      alt="Romina Veisy — creative UX/UI & visual designer. CV updated October 2026. Download the PDF using the button above."
+      src="/images/cv/romina-veisy-cv-page1.webp"
+      width="1241"
+      height="1755"
       loading="lazy"
       decoding="async"
       class="d-ab01af0bc"
     />
+    <a
+      class="cv-portfolio-link"
+      href="https://rominaveisy.com/"
+      aria-label="Visit Romina Veisy’s portfolio at www.rominaveisy.com"
+    ></a>
   </div>
   <p data-figma-id="438:371" class="d-2573a8add">
     ROMINA VEISY · CV · 1 / 1
   </p>
 </div>
+
+<style>
+  /* Match the portfolio address in the PDF preview; keep it keyboard accessible. */
+  .cv-portfolio-link {
+    position: absolute;
+    left: 5.4%;
+    top: 11.6%;
+    width: 22%;
+    height: 1.8%;
+    min-height: 24px;
+    border-radius: 2px;
+  }
+  .cv-portfolio-link:hover,
+  .cv-portfolio-link:focus-visible {
+    outline: 2px solid #59595e;
+    outline-offset: 2px;
+  }
+</style>
