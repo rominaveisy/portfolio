@@ -1,5 +1,14 @@
 # Production deployment record
 
+## Circular favicon — 4 October 2026, latest release
+
+The owner chose a black circle with centred red R_V lettering after reviewing the square variant. The circle fills the icon canvas, with transparency only outside its circular edge and no white fill or inset square.
+
+- Source commit: `12a8ee7`, preserved on `codex/circular-favicon` and advanced to `main`.
+- Cloudflare version: `f149c296-927e-4910-85c0-176595859b95`; tag `12a8ee7`; message `circular-favicon-2026-10-04`.
+- Only the SVG and PNG assets changed in this deployment. Build and deployment dry run passed; live files matched the reviewed local files. Pixel checks verified an opaque circle interior, no white fill, transparent exterior corners and lettering centred within 1px.
+- Google must recrawl the stable favicon URL to refresh its result. Its surrounding badge remains controlled by Google.
+
 ## Favicon clarification — 4 October 2026
 
 The owner clarified that the entire favicon canvas, including the corners, must be black, with only R_V in red. Both SVG and PNG now have a fully opaque black background rather than transparent corners around a circle.
