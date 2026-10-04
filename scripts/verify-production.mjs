@@ -62,7 +62,7 @@ try {
       await page.mouse.move(700, 500);
       await page.mouse.wheel(0, 600);
       await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', 'cyclointel');
-      await expect(page.locator('.work-arc')).toHaveCSS('opacity', '1');
+      await expect(page.locator('.work-arc')).toHaveCount(0);
     }
     for (const width of [320, 390, 768, 1440]) {
       await page.setViewportSize({ width, height: 900 });

@@ -1,6 +1,19 @@
 # Production deployment record
 
-## Circular favicon — 4 October 2026, latest release
+## Work illustration balance — 4 October 2026, latest release
+
+The owner requested a professional review of illustration size and position, and removal of the curved “Work” label. All three illustrations now share a responsive column centred in the available space to the right of the copy. They grow on wider screens and retain clear text and viewport margins on laptops. The curved label and its animation styling are removed.
+
+- Source commit: `de7d43a`, preserved on `codex/work-layout-balance` and advanced to `main`.
+- Cloudflare version: `3bd18d10-fae4-4ecd-95f0-221d96a0c8aa`; tag `de7d43a`; message `work-layout-balance-2026-10-04`.
+- Astro check: zero errors, warnings or hints. Production build and deployment dry run passed.
+- Chrome regression verification: 50 tests passed in the full run; the updated illustration check passed on a targeted rerun after allowing for the shorter ultrawide aspect ratio. All 51 checks passed across those runs.
+- Before/after visual review covered five desktop widths and 390px mobile. All 15 live cover measurements match the reviewed local layouts, with no overflow or runtime errors. Text positions, wheel pivots, links and mobile alternatives are preserved.
+- Live production verification passed at `2026-10-04T21:13:54.046Z`: seven routes, 125 assets/links, metadata, PDF, redirects, motion, responsive layouts, gallery, contact drafts and no-JavaScript fallback. The production check now expects the curved label to be absent.
+
+The subsequent verification/documentation commit does not change the deployed bundle. The preceding deployed version remains `f149c296-927e-4910-85c0-176595859b95` for rollback.
+
+## Circular favicon — 4 October 2026
 
 The owner chose a black circle with centred red R_V lettering after reviewing the square variant. The circle fills the icon canvas, with transparency only outside its circular edge and no white fill or inset square.
 
