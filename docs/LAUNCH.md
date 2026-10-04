@@ -1,5 +1,14 @@
 # Production deployment record
 
+## Favicon clarification — 4 October 2026
+
+The owner clarified that the entire favicon canvas, including the corners, must be black, with only R_V in red. Both SVG and PNG now have a fully opaque black background rather than transparent corners around a circle.
+
+- Source commit: `65bc81d`, saved on `codex/solid-black-favicon` and advanced to `main`.
+- Cloudflare version: `218065a3-f80f-4748-b5b9-ffbf5ff81460`; tag `65bc81d`; message `solid-black-favicon-2026-10-04`.
+- Deployment changed only the two favicon assets. Production build and deployment dry run passed.
+- Both live files matched the reviewed local files. Pixel checks verified the 96px PNG is fully opaque, all four corners are pure black, and there are no white pixels. Google still controls its surrounding search-result badge and refresh schedule.
+
 ## Current release — 4 October 2026
 
 The owner-approved portfolio refinements are live at **https://rominaveisy.com/**. See [REFINEMENTS.md](REFINEMENTS.md) for the requested changes, preservation checks and HTTP entry investigation.
