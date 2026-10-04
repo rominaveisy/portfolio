@@ -1,4 +1,21 @@
-# Production launch — 26 September 2026
+# Production deployment record
+
+## Current release — 4 October 2026
+
+The owner-approved portfolio refinements are live at **https://rominaveisy.com/**. See [REFINEMENTS.md](REFINEMENTS.md) for the requested changes, preservation checks and HTTP entry investigation.
+
+- Source commit: `8609d00dd0c2ac3184e836f6658e4e1e8e0c1bf7`, pushed to `codex/portfolio-refinements` and advanced onto `main` without rewriting history.
+- Cloudflare version: `1cc88e47-7ab5-4a11-8081-082d3d812b60`, serving 100% of traffic since `2026-10-04T19:55:50.660Z`.
+- Version tag: `8609d00`; release message: `portfolio-refinements-2026-10-04`.
+- Preflight: 51 Chrome tests passed; Astro check returned zero errors/warnings/hints; production build, local production verification, updated routing checks and Wrangler dry run passed.
+- Live verification passed starting at `2026-10-04T19:56:14.025Z`: all seven pages, 125 assets/links, updated title/PDF/favicon, indexing, canonical URLs, security headers, HTTP/www redirects with paths/queries, host-specific HSTS, layouts, motion, gallery, contact drafts, no-JavaScript fallback and 404/trailing-slash handling.
+- Interactive deployment kept both existing custom domains and produced no DNS-conflict prompt. No DNS or firewall rule was changed.
+- A clean profile in installed Firefox opened the original HTTP www entry successfully before deployment; this is a targeted navigation check, not a full Firefox regression suite. A later automated headless capture timed out, so the complete production regression evidence is from Chrome. The owner's Firefox failed on HTTP but opened HTTPS www. **After deployment, the owner visited the secure www URL to receive the new HTTPS policy and confirmed that Google's old Home result now opens successfully.**
+- The revised one-page PDF was visually reviewed, its links/text verified, and a rendered comparison showed no changes outside the four approved edit regions. Its original remains recoverable from Git history.
+
+A subsequent documentation-only commit records this release and does not alter the deployed bundle. Roll back to the September version below if needed, then revert the source change to prevent it being redeployed. The one-day, host-specific HSTS policy expires after a day without refresh; to remove it immediately for a browser that revisits securely, serve `Strict-Transport-Security: max-age=0` on that host.
+
+## Original launch — 26 September 2026
 
 The owner explicitly requested updating the remote Git repository, deploying the latest version and finalizing the site. This authorizes this production launch and supersedes the earlier preview-only plan.
 

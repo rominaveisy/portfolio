@@ -27,7 +27,7 @@ Both PDFs were rendered with PDFium at the same resolution. A pixel comparison c
 - Full Chrome browser suite: 51 tests passed. Cloudflare deployment dry run passed.
 - No dependency updates, new browser downloads, DNS changes or email sending are part of this revision.
 
-## Reported Google entry error — investigation remains open
+## Reported Google entry error — mitigation verified by the owner
 
 The owner sees `403 Forbidden` in Firefox after opening Google's old Home URL, `http://www.rominaveisy.com/`. The HTTPS About result works. A private-window retry of the HTTP www URL also failed for the owner.
 
@@ -36,5 +36,7 @@ Checks from this computer using HTTP requests, installed Chrome with a Google re
 The owner subsequently confirmed that `https://www.rominaveisy.com/` opens successfully in the same Firefox session. The failure is therefore specific to the HTTP entry path in that session; its exact source is still unconfirmed.
 
 The existing canonical redirect remains intact. A host-specific one-day HSTS header is added to HTTPS responses for the apex and www (including www redirects), so a successful secure visit teaches the browser to upgrade later HTTP visits before making an insecure request. No `includeSubDomains` or preload directive is used. This mitigation needs a secure visit to each hostname first and does not repair an external HTTP block for a first-time visitor. Routing checks verify policy scope and preservation of redirects, response headers, bodies and 404 status. No DNS, firewall or browser-setting change was made.
+
+After deployment, the owner opened `https://www.rominaveisy.com/?https-check=20261004` in the same Firefox window, retried Google's old Home result, and confirmed: “Yes, the Google result now opens”. This verifies the mitigation in the previously failing session. The underlying HTTP-only denial was not reproduced or conclusively attributed to a network/browser component.
 
 Google must recrawl the pages before changed metadata and icons can appear; its final title/snippet wording is not directly controllable by this repository.
