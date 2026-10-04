@@ -6,7 +6,7 @@ The owner approved implementation after reviewing the requested edits. This supe
 
 - Home adds only `/UI` to its visible professional title: “a creative UX/UI & visual designer”. Search/browser and sharing titles use the same phrase followed by “— Romina Veisy”.
 - Home and About descriptions now describe interfaces, prototypes, visual communication and the existing architecture/service/Cyclomedia experience. About's profession label and Contact/CV metadata use the same professional identity.
-- The favicon is a black circle with the red R_V mark, supplied as SVG and 96px PNG. Google controls its own surrounding badge, crawling and search-result presentation.
+- After the owner's clarification, the favicon has an entirely opaque black background, including all corners, with only the R_V mark in red. Both the SVG and 96px PNG have no white or transparent area. Google controls its own surrounding badge, cropping, crawling and search-result presentation.
 - The three animated Work illustrations are 30% larger. Horizontal offsets keep them fully within narrow desktop viewports without moving the text, rotation origins or project links.
 - A curved black “Work” label appears with the first project, remains through all three covers, and fades out when returning to the introduction. Mobile, reduced-motion and skipped-animation alternatives remain unchanged.
 - The one-page CV and matching web preview have the updated title and profile, “UX/UI & Visual Designer (Project-Based)” at Cyclomedia, and a clickable `www.rominaveisy.com` address targeting `https://rominaveisy.com/`. The web preview also has an accessible link over that address.
