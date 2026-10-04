@@ -10,13 +10,11 @@ test('One small gesture completes each cover and reverses without stopping halfw
 }) => {
   await page.goto('/');
   await scene(page, 'intro');
-  await expect(page.locator('.work-arc')).toHaveCSS('opacity', '0');
   await page.screenshot({ path: '.cache/qa/home.png' });
   for (const name of ['cyclointel', 'samenstad', 'positioning']) {
     await page.mouse.wheel(0, 40);
     await scene(page, 'transition');
     await scene(page, name);
-    await expect(page.locator('.work-arc')).toHaveCSS('opacity', '1');
     await expect(page.locator('[data-project-link="' + name + '"]')).toHaveAttribute(
       'tabindex',
       '0',
@@ -32,7 +30,6 @@ test('One small gesture completes each cover and reverses without stopping halfw
     await scene(page, name);
   }
   await expect(page.locator('[data-project-link][tabindex="0"]')).toHaveCount(0);
-  await expect(page.locator('.work-arc')).toHaveCSS('opacity', '0');
 });
 
 test('A long trackpad gesture lands on only one cover', async ({ page }) => {
@@ -61,17 +58,26 @@ test('A long trackpad gesture lands on only one cover', async ({ page }) => {
   await scene(page, 'samenstad');
 });
 
-test('Enlarged illustrations stay fully inside narrow and wide desktop covers', async ({
+test('Project illustrations stay clear of the text and balance narrow and wide covers', async ({
   page,
 }) => {
-  for (const width of [1024, 1440, 1900]) {
+  const copy = {
+    cyclointel: '.d-2f538eb52',
+    samenstad: '.d-991ada67d .d-08bedd5fe',
+    positioning: '.d-d91e7c1b3 .d-08bedd5fe',
+  };
+  for (const width of [1024, 1440, 1900, 2560]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/');
     await scene(page, 'intro');
-    for (const name of ['cyclointel', 'samenstad', 'positioning']) {
+    for (const name of ['cyclointel', 'samenstad', 'positioning'] as const) {
       await page.mouse.wheel(0, 40);
       await scene(page, name);
       const art = (await page.locator(`[data-project-art="${name}"]`).boundingBox())!;
+      const text = (await page.locator(copy[name]).boundingBox())!;
+      expect(art.x - text.x - text.width).toBeGreaterThan(24);
+      const illustrationColumn = width - text.x - text.width;
+      expect(width - art.x - art.width).toBeLessThan(illustrationColumn * 0.35);
       expect(art.x).toBeGreaterThan(0);
       expect(art.x + art.width).toBeLessThan(width - 10);
       expect(art.y).toBeGreaterThan(60);

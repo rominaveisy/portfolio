@@ -7,8 +7,8 @@ The owner approved implementation after reviewing the requested edits. This supe
 - Home adds only `/UI` to its visible professional title: “a creative UX/UI & visual designer”. Search/browser and sharing titles use the same phrase followed by “— Romina Veisy”.
 - Home and About descriptions now describe interfaces, prototypes, visual communication and the existing architecture/service/Cyclomedia experience. About's profession label and Contact/CV metadata use the same professional identity.
 - Following the owner's latest choice, the favicon is a full-size black circle with red R_V lettering centred inside it, supplied as SVG and 96px PNG. Only the corners outside the circle are transparent; there is no white fill or inset square. This replaces the preceding opaque square variant. Google controls its own surrounding badge, cropping, crawling and search-result presentation.
-- The three animated Work illustrations are 30% larger. Horizontal offsets keep them fully within narrow desktop viewports without moving the text, rotation origins or project links.
-- A curved black “Work” label appears with the first project, remains through all three covers, and fades out when returning to the introduction. Mobile, reduced-motion and skipped-animation alternatives remain unchanged.
+- Following the owner's layout review, the three animated Work illustrations share a responsive visual column centred in the space to the right of the text. Their size grows with the available width, with an upper limit to preserve breathing room. This replaces the earlier uniform 30% enlargement and separate offsets. Text, rotation origins and project links keep their existing positions.
+- The curved “Work” label has been removed at the owner's request, including its SVG, styles and animation property. Mobile, reduced-motion and skipped-animation alternatives remain unchanged.
 - The one-page CV and matching web preview have the updated title and profile, “UX/UI & Visual Designer (Project-Based)” at Cyclomedia, and a clickable `www.rominaveisy.com` address targeting `https://rominaveisy.com/`. The web preview also has an accessible link over that address.
 
 ## PDF preservation
@@ -23,7 +23,7 @@ Both PDFs were rendered with PDFium at the same resolution. A pixel comparison c
 
 - Astro/TypeScript: zero errors, warnings or hints; production build passed.
 - Local production runtime: all seven routes and 125 assets/internal links passed, including current title, favicon resources, PDF hash, canonical URLs, indexing, robots/sitemap, CSP/security headers, responsive overflow checks, Home motion, gallery, email drafts, no-JavaScript fallback and real 404 routing.
-- Work covers visually inspected at 1280, 1440, 1900 and 2560px. Clipping found at 1440px was corrected before final checks. Regression coverage includes full artwork bounds at 1024, 1440 and 1900px, plus the curved label's forward/reverse visibility.
+- The latest Work balance was visually reviewed at 1024, 1280, 1440, 1900 and 2560px, plus the unchanged 390px mobile layout. At 1900×970 the artwork canvases are approximately 564px wide, with 145px between text and artwork and a matching right margin. Regression coverage checks text clearance, viewport bounds and excessive right-side whitespace at four desktop widths, alongside forward/reverse motion.
 - Full Chrome browser suite: 51 tests passed. Cloudflare deployment dry run passed.
 - No dependency updates, new browser downloads, DNS changes or email sending are part of this revision.
 

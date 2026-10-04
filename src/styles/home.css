@@ -158,37 +158,27 @@ html:not(.motion-ready) [data-figma-id='214:504'] {
   background: transparent;
 }
 .motion-ready [data-project-art] {
-  /* Keep enlarged artwork inside the viewport when the stage has no spare width. */
-  transform: translateX(min(7%, calc(var(--stage-width) - var(--art-right-edge)))) scale(1.3);
-  transform-origin: left center;
+  /* The copy ends at 1110px in the source stage. Centre the artwork in the
+     remaining width, preserving the wheel's original rotation geometry. */
+  --art-center: calc((var(--stage-width) + 1110px) / 2);
+  top: 50%;
+  bottom: auto;
+  width: clamp(470px, calc((var(--stage-width) - 1110px) * 0.66), 700px);
+  height: auto;
+  transform: translate(calc(var(--art-center) - var(--art-origin-x)), var(--art-offset-y))
+    translate(-50%, -50%);
 }
 [data-project-art='cyclointel'] {
-  --art-right-edge: 1660px;
+  --art-origin-x: 1131px;
+  --art-offset-y: 46px;
 }
 [data-project-art='samenstad'] {
-  --art-right-edge: 1800px;
+  --art-origin-x: 1190px;
+  --art-offset-y: -10px;
 }
 [data-project-art='positioning'] {
-  --art-right-edge: 1760px;
-}
-.work-arc {
-  display: none;
-}
-.motion-ready .work-arc {
-  display: block;
-  position: absolute;
-  left: 12px;
-  top: 425px;
-  width: 95px;
-  height: 220px;
-  overflow: visible;
-  fill: #000;
-  font-family: 'Archivo Variable', sans-serif;
-  font-size: 30px;
-  font-weight: 750;
-  letter-spacing: 2px;
-  pointer-events: none;
-  opacity: var(--work-label-opacity, 0);
+  --art-origin-x: 1164px;
+  --art-offset-y: -9px;
 }
 @keyframes explore-spin {
   to {
