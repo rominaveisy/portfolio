@@ -8,7 +8,14 @@ import Cv from '../components/design/cv.astro';
   description="Download Romina Veisy’s CV — a creative UX/UI & visual designer with experience in architecture, service design and digital tools at Cyclomedia."
   active="cv"
 >
-  <h1 class="sr-only">Romina Veisy — CV</h1>
+  <div class="cv-intro">
+    <h1 class="sr-only">Romina Veisy — CV</h1>
+    <p>A creative UX/UI &amp; visual designer.</p>
+    <a href="/documents/romina-veisy-cv.pdf" target="_blank" rel="noopener noreferrer">
+      Open full-size CV <span aria-hidden="true">↗</span>
+      <span class="sr-only"> (opens PDF in a new tab)</span>
+    </a>
+  </div>
   <div class="desktop-artboard">
     <Cv />
   </div>

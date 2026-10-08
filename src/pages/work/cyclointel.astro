@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import CycloIntel from '../../components/design/cyclointel.astro';
+import CaseContents from '../../components/CaseContents.astro';
 ---
 
 <Layout
@@ -8,6 +9,18 @@ import CycloIntel from '../../components/design/cyclointel.astro';
   description="Designing a competitor-intelligence system for Cyclomedia that decides what matters before it interrupts someone."
   active="work"
 >
+  <CaseContents
+    name="CycloIntel"
+    sections={[
+      { id: 'overview', label: 'Overview & role' },
+      { id: 'problem', label: 'The problem' },
+      { id: 'first-version', label: 'First version' },
+      { id: 'second-version', label: 'Second version' },
+      { id: 'final-design', label: 'The final design' },
+      { id: 'reliability', label: 'Reliability' },
+      { id: 'reflection', label: 'Honest reflection' },
+    ]}
+  />
   <div class="case-study">
     <CycloIntel />
   </div>

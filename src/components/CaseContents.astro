@@ -1,0 +1,47 @@
+---
+interface Props {
+  name: string;
+  sections: { id: string; label: string }[];
+}
+const { name, sections } = Astro.props;
+---
+
+<details class="case-contents">
+  <summary>
+    <span>{name}</span> On this page{' '}
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      aria-hidden="true"
+    >
+      <path d="m5 8 5 5 5-5" />
+    </svg>
+  </summary>
+  <nav aria-label={`${name} chapters`}>
+    {sections.map(({ id, label }) => (
+      <a href={`#${id}`}>{label}</a>
+    ))}
+  </nav>
+</details>
+<script>
+  document.querySelectorAll<HTMLDetailsElement>('.case-contents').forEach((contents) => {
+    contents.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        contents.open = false;
+        requestAnimationFrame(() =>
+          document.getElementById(link.hash.slice(1))?.focus({ preventScroll: true }),
+        );
+      });
+    });
+    contents.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && contents.open) {
+        contents.open = false;
+        contents.querySelector('summary')?.focus();
+      }
+    });
+  });
+</script>

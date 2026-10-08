@@ -30,19 +30,30 @@ import '../styles/home.css';
       <h2 id="work-title">From the inside out.</h2>
     </div>
     {projects.map((project) => (
-      <article class="project-card">
-        <div>
+      <article class="project-card" aria-labelledby={`project-${project.slug}`}>
+        <div class="project-copy">
           <p class="project-number">
             {project.number} / {project.name.toUpperCase()}
           </p>
-          <h3>{project.title}</h3>
+          <h3 id={`project-${project.slug}`}>{project.title}</h3>
           <p class="project-description">{project.description}</p>
           {project.status && <p class="project-status">{project.status}</p>}
           <a class="project-cta" href={`/work/${project.slug}/`}>
             Explore this work <span aria-hidden="true">↗</span>
           </a>
         </div>
-        <img src={project.image} alt={project.alt} width="700" height="467" loading="lazy" />
+        <div class="project-art">
+          <img
+            src={`/images/home/cards/${project.slug}-640.webp`}
+            srcset={`/images/home/cards/${project.slug}-640.webp 640w, /images/home/cards/${project.slug}-1280.webp 1280w`}
+            sizes="(min-width: 1400px) 600px, (min-width: 700px) 44vw, 90vw"
+            alt={project.alt}
+            width="700"
+            height="467"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
       </article>
     ))}
   </section>

@@ -19,6 +19,8 @@ The tracked source, assets, motion data and current CV are sufficient for a norm
 
 The owner has authorized the production launch at **https://rominaveisy.com/**. The original desktop checkpoint remains on `feature/figma-desktop`; responsive work is preserved on `codex/responsive-and-launch`. All seven screens, the 55-image About gallery, scroll-controlled Home, email-draft form, CV and phone/tablet layouts are implemented. The approved October edits are recorded in [the refinement review](docs/REFINEMENTS.md). See the launch record for the exact deployed version and live verification.
 
+The October 8 phone/tablet improvements are on `codex/phone-tablet-experience`, pending owner review and deployment. See [the design reference](docs/design-reference.md#phone-and-tablet-adaptation--october-8-2026) for the design decisions and verification. A branch push does not update the public site.
+
 Studio and the third project's coming-soon status remain intentional. No custom social-sharing image has been approved; existing text metadata is retained.
 
 Changing Figma does not automatically change the website. The code/assets must also be updated.
@@ -78,18 +80,19 @@ Where pixel-identical WebP files replaced PNGs, the original PNGs remain locally
 
 ## Agreed interactions
 
-- Home's introduction reads “I’m Romina Veisy” / “a creative UX/UI & visual designer.” All pages share Home's fixed translucent header so content remains visible behind it.
+- Home's introduction reads “I’m Romina Veisy” / “a creative UX/UI & visual designer.” Desktop pages share Home's fixed translucent header. Phones and touch tablets use a solid dark header; phones have a large-link menu.
 - On Home, Work animates to the first project and R_V animates back to the introduction, without reloading.
 - One scroll gesture completes one Home transition: down advances to the next cover, up returns to the previous cover. Decaying trackpad momentum is filtered, but fresh wheel input is accepted after each transition without moving the pointer. Scrolling works over text, artwork, navigation and empty space. Scrollbar movement settles to the nearest complete cover; the last cover allows normal scrolling to the footer. Arrow/Page keys and Space also move between covers.
 - “Scroll to explore” continuously rotates while the intro is visible and travels upward with the intro. The project sequence itself does not autoplay.
-- The three animated project illustrations are 30% larger, with their horizontal positions constrained on narrower desktop screens. A curved “Work” label fades in with the covers and disappears on return to the introduction.
+- The three animated project illustrations use the approved October 4 desktop positions. The curved “Work” label has been removed. On phones the illustrations lead each project; tablets pair the artwork and text in two columns.
+- Phones and touch tablets use normal vertical scrolling. Long case studies have chapter links, and the CV offers a full-size PDF link as well as its download and preview.
 - Skip animation and reduced-motion mode expose all three projects without motion.
 - Studio is not clickable; hover or keyboard focus shows “Coming soon.”
 - The third project links to its coming-soon page.
 - Contact’s “Email me” and “Send message” open a chooser for Gmail, Outlook, or an installed email app. The form prepares an encoded draft, preserves the visitor’s fields, and provides a copyable backup if webmail sign-in drops the draft. Visitors review and send it in their own email account. Nothing is sent automatically or stored by this website. Without JavaScript, the form stays disabled and visible Gmail/Outlook links remain available.
 - Public contact details are `rominaveisy.ar@gmail.com`, `+31 6 2043 5932` and the confirmed LinkedIn profile.
 - The CV download and web preview contain the owner-approved October 2026 title, profile, Cyclomedia role and clickable portfolio address. All other CV content and layout are preserved; the original PDF remains in Git history.
-- Gallery images open in a modal; Escape closes it and arrow keys change images.
+- Gallery images open in a modal; Escape closes it and arrow keys change images. Touch visitors can swipe horizontally or use the previous/next buttons.
 
 ## Safe updates
 

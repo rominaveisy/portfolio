@@ -8,7 +8,7 @@ const stage = document.querySelector<HTMLElement>('.home-stage')!;
 const area = document.querySelector<HTMLElement>('.home-scroll')!;
 const projectLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-project-link]')];
 const preference = window.matchMedia(
-  '(min-width: 1024px) and (prefers-reduced-motion: no-preference)',
+  '(min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)',
 );
 const scenes = ['intro', 'cyclointel', 'samenstad', 'positioning'];
 // Keep Figma's geometry/easing, but remove its opening wait and stop on complete covers.
@@ -312,9 +312,10 @@ function plainClick(event: MouseEvent) {
 document.querySelectorAll<HTMLAnchorElement>('a[href="/#work"]').forEach((link) => {
   link.addEventListener('click', (event) => {
     if (!plainClick(event)) return;
-    event.preventDefault();
-    if (trigger) goToScene(1);
-    else document.getElementById('work')?.scrollIntoView({ behavior: 'instant' });
+    if (trigger) {
+      event.preventDefault();
+      goToScene(1);
+    }
   });
 });
 document.querySelector<HTMLAnchorElement>('.brand')?.addEventListener('click', (event) => {

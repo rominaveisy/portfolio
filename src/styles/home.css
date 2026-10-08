@@ -79,7 +79,7 @@ html:not(.motion-ready) [data-figma-id='214:504'] {
   line-height: 1.5;
   max-width: 640px;
 }
-.project-card > img {
+.project-art > img {
   width: 100%;
   height: auto;
 }
@@ -197,7 +197,9 @@ html:not(.motion-ready) [data-figma-id='214:504'] {
 .static-work .motion-skip {
   display: none;
 }
-@media (max-width: 1023px), (prefers-reduced-motion: reduce) {
+@media (max-width: 1023px),
+  (max-width: 1366px) and (hover: none) and (pointer: coarse),
+  (prefers-reduced-motion: reduce) {
   .home-viewport {
     height: min(95svh, 780px);
     min-height: 520px;
@@ -285,7 +287,7 @@ html:not(.motion-ready) [data-figma-id='214:504'] {
   .project-description {
     font-size: 18px;
   }
-  .project-card > img {
+  .project-art > img {
     max-width: 500px;
   }
   .home-footer {
@@ -309,7 +311,7 @@ html:not(.motion-ready) [data-figma-id='214:504'] {
 }
 
 /* Small-screen introduction uses normal flow so larger text never overlaps. */
-@media (max-width: 1023px) {
+@media (max-width: 1023px), (max-width: 1366px) and (hover: none) and (pointer: coarse) {
   .home-viewport {
     height: auto;
     min-height: 0;
@@ -407,5 +409,222 @@ html:not(.motion-ready) [data-figma-id='214:504'] {
   }
   .project-list {
     padding-top: 48px;
+  }
+}
+
+/* An editorial, naturally scrolling composition for phones and touch tablets. */
+@media (max-width: 1023px), (max-width: 1366px) and (hover: none) and (pointer: coarse) {
+  .home-page {
+    color-scheme: dark;
+  }
+  [data-design-page='home'] {
+    padding: calc(116px + env(safe-area-inset-top)) var(--page-gutter) 24px;
+  }
+  [data-figma-id='214:480'] {
+    left: calc(var(--page-gutter) + 40px);
+    top: calc(142px + env(safe-area-inset-top));
+  }
+  [data-figma-id='214:476'] > span {
+    line-height: 28px;
+  }
+  [data-figma-id='214:481'] {
+    font-size: clamp(46px, 10.8vw, 82px);
+    max-width: 12ch;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    margin-top: 58px;
+    text-wrap: balance;
+  }
+  [data-figma-id='214:479'] {
+    margin-top: 32px;
+  }
+  [data-figma-id='214:479'] span {
+    font-size: clamp(23px, 4.5vw, 38px);
+  }
+  [data-figma-id='214:482'] {
+    margin-top: 44px;
+    max-width: 35ch;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  [data-figma-id='214:477'] {
+    top: 280px;
+    right: -220px;
+    width: 410px;
+    height: 410px;
+    opacity: 0.62;
+  }
+  .static-project-link {
+    margin: 0 var(--page-gutter) 0;
+    min-height: 52px;
+    align-items: center;
+    font-weight: 650;
+    font-size: 16px;
+  }
+  .project-list {
+    padding: 60px var(--page-gutter) 0;
+    scroll-margin-top: 86px;
+  }
+  .work-list-heading {
+    padding-bottom: 12px;
+  }
+  .work-list-heading > p {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #d8d1c8;
+  }
+  .work-list-heading h2 {
+    font-family: 'Archivo Variable', sans-serif;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+    margin-top: 18px;
+    max-width: 12ch;
+    text-wrap: balance;
+  }
+  .project-card {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'art' 'copy';
+    gap: 24px;
+    padding-block: 36px 48px;
+    border-bottom: 1px solid #ffffff38;
+  }
+  .project-copy {
+    grid-area: copy;
+    min-width: 0;
+  }
+  .project-art {
+    grid-area: art;
+    position: relative;
+    display: grid;
+    place-items: center;
+    isolation: isolate;
+    aspect-ratio: 1.35;
+    overflow: clip;
+  }
+  .project-art::before {
+    content: '';
+    position: absolute;
+    width: 112%;
+    aspect-ratio: 1;
+    top: -24%;
+    left: -37%;
+    z-index: -1;
+    background: url('/images/home/circle-outer.webp') center / contain no-repeat;
+  }
+  .project-art > img {
+    width: 95%;
+    max-width: 560px;
+    height: auto;
+  }
+  .project-number {
+    font-size: 11px;
+    letter-spacing: 1.3px;
+    color: #d8d1c8;
+  }
+  .project-card h3 {
+    font-size: clamp(34px, 8.7vw, 46px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-block: 16px;
+    text-wrap: balance;
+  }
+  .project-description {
+    font-size: 17px;
+    line-height: 1.65;
+    max-width: 38ch;
+    color: #e3dfd8;
+  }
+  .project-cta {
+    min-height: 52px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 24px;
+    padding: 16px 20px;
+    border-radius: 6px;
+  }
+  .project-cta:active {
+    background: #dfd8ce;
+  }
+  .project-status {
+    font-size: 15px;
+    margin-top: 16px;
+  }
+  .home-footer {
+    padding: 56px var(--page-gutter) max(48px, env(safe-area-inset-bottom));
+    gap: 18px;
+  }
+  .home-footer > p {
+    font-size: clamp(32px, 5vw, 48px);
+    line-height: 1.1;
+  }
+  .home-footer > a:not(.footer-cv) {
+    font-size: clamp(42px, 8vw, 76px);
+    color: #ff7777;
+    min-height: 52px;
+  }
+  .home-footer .footer-cv {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 17px;
+  }
+}
+@media (min-width: 700px) and (max-width: 1023px),
+  (min-width: 700px) and (max-width: 1366px) and (hover: none) and (pointer: coarse) {
+  [data-design-page='home'] {
+    padding-top: calc(138px + env(safe-area-inset-top));
+    padding-bottom: 32px;
+  }
+  [data-figma-id='214:480'] {
+    top: calc(164px + env(safe-area-inset-top));
+  }
+  [data-figma-id='214:481'] {
+    margin-top: 64px;
+    max-width: 12ch;
+    font-size: clamp(64px, 8.2vw, 94px);
+  }
+  [data-figma-id='214:482'] {
+    font-size: 19px;
+    max-width: 38ch;
+  }
+  [data-figma-id='214:477'] {
+    width: 570px;
+    height: 570px;
+    right: -190px;
+    top: 175px;
+    opacity: 0.88;
+  }
+  .project-list {
+    padding-top: 80px;
+  }
+  .work-list-heading h2 {
+    max-width: none;
+  }
+  .project-card {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas: 'art copy';
+    gap: clamp(32px, 5vw, 64px);
+    padding-block: 56px;
+  }
+  .project-art {
+    aspect-ratio: 1.1;
+  }
+  .project-art::before {
+    width: 140%;
+    left: -60%;
+    top: -10%;
+  }
+  .project-card h3 {
+    font-size: clamp(32px, 4vw, 54px);
+  }
+  .project-description {
+    font-size: 17px;
+  }
+  .project-cta {
+    width: auto;
+    min-width: 210px;
+    gap: 32px;
   }
 }

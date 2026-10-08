@@ -98,7 +98,7 @@ test('Work and R_V play the same motion without reloading Home', async ({ page }
   expect(await progress(page)).toBeGreaterThan(0);
   expect(await progress(page)).toBeLessThan(1 / 3);
   await scene(page, 'cyclointel');
-  await page.locator('.brand').click();
+  await page.getByRole('banner').getByRole('link', { name: 'Romina Veisy — home' }).click();
   await scene(page, 'transition');
   await page.waitForTimeout(300);
   expect(await progress(page)).toBeGreaterThan(0);

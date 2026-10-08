@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Samenstad from '../../components/design/samenstad.astro';
+import CaseContents from '../../components/CaseContents.astro';
 ---
 
 <Layout
@@ -8,6 +9,19 @@ import Samenstad from '../../components/design/samenstad.astro';
   description="A civic-technology UX case study: connecting a street, a municipality and a company to fix something together."
   active="work"
 >
+  <CaseContents
+    name="Samenstad"
+    sections={[
+      { id: 'overview', label: 'Overview & role' },
+      { id: 'problem', label: 'The problem' },
+      { id: 'research', label: 'Research' },
+      { id: 'reframe', label: 'The reframe' },
+      { id: 'final-design', label: 'The final design' },
+      { id: 'sponsorship', label: 'The sponsor layer' },
+      { id: 'inclusion', label: 'Inclusive design' },
+      { id: 'reflection', label: 'Where it stands' },
+    ]}
+  />
   <div class="case-study">
     <Samenstad />
   </div>

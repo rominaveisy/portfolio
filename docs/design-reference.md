@@ -22,10 +22,36 @@ Wheel input is captured at the window level, including over artwork, text, navig
 
 The Home textured circle uses Figma’s export of that **individual ellipse**, avoiding inconsistent SVG grain rendering. It is not a screenshot of the page; page content remains interactive HTML.
 
-Desktop artboards retain the 1707px reference geometry, proportionally fitted on smaller laptops. Case studies use the 1120px editorial column. Full responsive reflow belongs to a separate next-stage branch after desktop approval.
+Desktop artboards retain the 1707px reference geometry, proportionally fitted on smaller laptops. Case studies use the 1120px editorial column. Narrow screens reflow into a reading layout; the October 2026 phone/tablet adaptation is described below.
 
-The latest Home copy is “I’m Romina Veisy” / “a creative UX & visual designer.” All routes share Home's fixed translucent header (`rgba(0, 0, 0, 0.8)`), including after scrolling.
+The latest Home copy is “I’m Romina Veisy” / “a creative UX/UI & visual designer.” Desktop routes share Home's fixed translucent header (`rgba(0, 0, 0, 0.8)`), including after scrolling. Phone and tablet navigation uses a solid dark background for readability over scrolling content.
 
 Contact's agreed behavior is a visible Gmail/Outlook/email-app draft chooser with copy fallbacks, not direct website sending. The Figma form is retained, overriding the original brief's instruction to omit a form.
 
 Owner review still covers Home scroll pacing, visual agreement and coming-soon presentation. A social-sharing image is still awaiting approval; none was invented. See [HANDOFF.md](HANDOFF.md) for all latest decisions and the responsive/launch sequence.
+
+## Phone and tablet adaptation — October 8, 2026
+
+Branch: `codex/phone-tablet-experience`. This is an adaptation of the approved red, black and paper identity, with the existing typefaces, illustrations and content. The public site is not deployed as part of this branch work.
+
+- Phones use a full-screen menu with large links, keyboard focus containment, Escape dismissal and focus restoration. Without JavaScript the original navigation remains visible.
+- Home uses natural page scrolling below 1024px and on coarse-pointer, non-hover tablets through 1366px. The desktop cover animation remains for a fine pointer with hover and no reduced-motion preference. Project art leads the phone layout; tablets pair it with the project text in two columns.
+- Six transparent WebP derivatives serve the three project illustrations at 640px and 1280px. The original desktop PNGs remain intact. The 1280px set totals 581,420 bytes versus 7,007,840 bytes for the original set; this is an asset-size comparison, not a measured page-load or Core Web Vitals result.
+- About gains section links, a portrait-and-biography tablet composition and a three-column tablet gallery. The image viewer accepts horizontal touch swipes as well as its existing buttons and keyboard arrows; vertical gestures do not advance images.
+- CycloIntel and Samenstad gain a compact chapter menu with native fragment links. With JavaScript it closes on selection, focuses the section and stays below the header. Without JavaScript it remains in normal document flow so expanded navigation does not cover the destination.
+- Contact keeps its email-draft behavior, adds comfortable field/control spacing and uses two columns on wider touch screens. The CV page adds a visible introduction and full-size PDF link above the existing download and preview. The reviewed PDF content is unchanged.
+- Safe-area insets, visible focus, reduced motion and the original no-JavaScript content paths are preserved. No new framework, font, package or external service was added.
+
+The professional-web-design, Impeccable adaptation and Web Design Guidelines skills informed the review. Their heuristics are design guidance, not evidence of user research. The manual detector's two warnings describe existing patterns: the hidden lightbox image receives a real source before opening, and the Positioning field-note accent belongs to the approved design.
+
+### Verification on this branch
+
+- `pnpm check`: 0 errors, warnings or hints. `pnpm build`: successful preview build with indexing disabled. Routing checks passed; no routing or hosting configuration changed.
+- All 61 Playwright tests passed in installed Chrome, including the existing desktop motion, illustration separation, contact draft, PDF hash, reduced-motion and no-JavaScript checks.
+- New interaction checks cover the phone menu's Tab loop, Escape, focus restoration, page navigation and resize; native Work fragments; chapter destinations below the fixed navigation; full-size PDF access; and gallery next/previous swipes without advancing on vertical gestures.
+- Synthesized browser touch input exercised scrolling and gallery gestures. Coarse-pointer tablet contexts at 834×1112, 1024×768 and 1366×1024 checked all seven routes for overflow and reflow. Existing narrow-layout checks cover 320, 390, 768 and 1023px. These are Chrome emulations, not physical devices or Safari.
+- Visual inspection covered the phone introduction, all three project illustrations, menu, About portrait/approach/gallery, Contact, CV and case-study chapters; portrait/landscape tablets; and desktop preservation. The additional empty gallery space in an early capture was an image-decode timing artifact; the loaded image slots were verified.
+- The phone Home image-request check confirms the original large project PNGs are not downloaded. All 55 gallery images remain present. Desktop artwork-position tests passed from 1024px through wide monitors.
+- Physical iPhone/iPad, Safari, on-screen keyboard and screen-reader testing remain unperformed. Safe-area handling was reviewed in CSS; real notch/system-bar behavior needs device verification. There are no field performance measurements or user-research claims.
+
+Local evidence is in ignored `.cache/touch-review/` and `.cache/qa/`; reproducible functional checks are committed under `tests/`. The production site still uses the separately recorded live release in `LAUNCH.md`.

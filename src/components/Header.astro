@@ -29,4 +29,74 @@ const links = [
       </span>
     </span>
   </nav>
+  <button
+    class="menu-toggle"
+    type="button"
+    aria-haspopup="dialog"
+    aria-controls="phone-menu"
+    aria-expanded="false"
+  >
+    Menu
+    <svg
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      aria-hidden="true"
+    >
+      <path d="M3 8h18M3 16h18" />
+    </svg>
+  </button>
 </header>
+<dialog id="phone-menu" class="phone-menu" aria-label="Site menu">
+  <div class="phone-menu-bar">
+    <a class="brand" href="/" aria-label="Romina Veisy — home">
+      R_V
+    </a>
+    <button type="button" class="menu-close" aria-label="Close menu">
+      Close{' '}
+      <svg
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        aria-hidden="true"
+      >
+        <path d="m5 5 14 14M19 5 5 19" />
+      </svg>
+    </button>
+  </div>
+  <nav aria-label="Mobile navigation">
+    {links.map((link) => (
+      <a href={link.href} aria-current={active === link.id ? 'page' : undefined}>
+        {link.label}
+        <svg
+          viewBox="0 0 24 24"
+          width="28"
+          height="28"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          aria-hidden="true"
+        >
+          <path d="M4 12h16m-7-7 7 7-7 7" />
+        </svg>
+      </a>
+    ))}
+  </nav>
+  <p class="menu-studio">
+    Studio <span>Coming soon</span>
+  </p>
+  <p class="menu-signature">
+    Romina Veisy
+    <br />
+    <span>UX/UI &amp; visual designer</span>
+  </p>
+</dialog>
+<script>
+  import '../scripts/navigation';
+</script>

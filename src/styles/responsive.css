@@ -7,7 +7,7 @@
   display: none;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1023px), (max-width: 1366px) and (hover: none) and (pointer: coarse) {
   :root {
     --page-gutter: clamp(20px, 5vw, 48px);
   }
@@ -669,7 +669,8 @@
   }
 }
 
-@media (min-width: 700px) and (max-width: 1023px) {
+@media (min-width: 700px) and (max-width: 1023px),
+  (min-width: 700px) and (max-width: 1366px) and (hover: none) and (pointer: coarse) {
   [data-design-page='about'] :is(.d-229fe78cf, .d-077cec5ff) {
     columns: 4;
   }
