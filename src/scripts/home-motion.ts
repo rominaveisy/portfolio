@@ -1,15 +1,20 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import motion from '../data/home-motion.json';
+import { clearCompact, measureCompact, updateCompact } from './compact-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 const root = document.documentElement;
 const stage = document.querySelector<HTMLElement>('.home-stage')!;
 const area = document.querySelector<HTMLElement>('.home-scroll')!;
 const projectLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-project-link]')];
-const preference = window.matchMedia(
-  '(min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)',
+const preference = window.matchMedia('(prefers-reduced-motion: no-preference)');
+const compactLayout = window.matchMedia(
+  '(max-width: 1023px), (max-width: 1366px) and (orientation: portrait) and (pointer: coarse)',
 );
+const copies = [...stage.querySelectorAll<HTMLElement>('[data-cover-copy]')];
+const sceneButtons = [...stage.querySelectorAll<HTMLButtonElement>('[data-scene-step]')];
+const announcement = stage.querySelector<HTMLElement>('[data-scene-announcement]')!;
 const scenes = ['intro', 'cyclointel', 'samenstad', 'positioning'];
 // Keep Figma's geometry/easing, but remove its opening wait and stop on complete covers.
 const coverStops = [0.31382, 0.5073, 0.58096, 0.63747];
@@ -30,8 +35,13 @@ let settledAt = 0;
 let currentProgress = 0;
 let heroInset = 0;
 let touchStart: number | undefined;
+let touchStartX = 0;
+let touchReader: HTMLElement | null = null;
+let touchPageTop: number | undefined;
+let nativeTouch = false;
 let touchConsumed = false;
 let targetScene = 0;
+let refreshScene: number | null = null;
 
 function sequencePosition(progress: number, stops: number[]) {
   const position = Math.min(3, Math.max(0, progress * 3));
@@ -82,6 +92,7 @@ function makeAnimations() {
 function update(progress: number) {
   currentProgress = progress;
   updateIntroSpacing(progress);
+  if (root.classList.contains('compact-motion')) updateCompact(progress);
   for (const { animation, labels } of animations) {
     animation.currentTime = sequencePosition(progress, labels ? labelStops : coverStops) * 1000;
   }
@@ -93,6 +104,20 @@ function update(progress: number) {
     link.tabIndex = enabled ? 0 : -1;
     link.style.pointerEvents = enabled ? 'auto' : 'none';
     link.setAttribute('aria-hidden', String(!enabled));
+  }
+  copies.forEach((copy) => {
+    const enabled = copy.dataset.coverCopy === active;
+    copy.inert = !enabled;
+    copy.setAttribute('aria-hidden', String(!enabled));
+    copy.tabIndex = enabled && root.classList.contains('compact-motion') ? 0 : -1;
+  });
+  sceneButtons.forEach((button) => {
+    button.disabled =
+      !settled || (Number(button.dataset.sceneStep) < 0 ? nearest === 0 : nearest === 3);
+  });
+  if (settled && stage.dataset.scene !== active) {
+    announcement.textContent =
+      nearest === 0 ? 'Introduction' : `${scenes[nearest]}, project ${nearest} of 3`;
   }
   stage.dataset.progress = progress.toFixed(5);
   stage.dataset.scene = settled ? active : 'transition';
@@ -137,7 +162,25 @@ function goToScene(index: number) {
 }
 
 function inScene() {
-  return trigger && window.scrollY >= trigger.start - 1 && window.scrollY <= trigger.end + 1;
+  return (
+    trigger &&
+    !document.querySelector('dialog[open]') &&
+    (window.visualViewport?.scale ?? 1) <= 1.01 &&
+    window.scrollY >= trigger.start - 1 &&
+    window.scrollY <= trigger.end + 1
+  );
+}
+
+function readerFrom(target: EventTarget | null) {
+  return root.classList.contains('compact-motion') && target instanceof Element
+    ? target.closest<HTMLElement>('[data-cover-copy]')
+    : null;
+}
+function canReadMore(reader: HTMLElement | null, direction: number) {
+  if (!reader || reader.scrollHeight <= reader.clientHeight + 1) return false;
+  return direction > 0
+    ? reader.scrollTop + reader.clientHeight < reader.scrollHeight - 2
+    : reader.scrollTop > 2;
 }
 
 function step(direction: number) {
@@ -158,6 +201,7 @@ function onWheel(event: WheelEvent) {
   if (!delta) return;
   const amount = Math.abs(delta);
   const direction = Math.sign(delta);
+  if (canReadMore(readerFrom(event.target), direction)) return;
   // A new wheel notch, renewed trackpad push, or reversal is intentional input,
   // even if the preceding gesture's quiet timer has not elapsed yet.
   const renewedInput =
@@ -206,6 +250,7 @@ function onKey(event: KeyboardEvent) {
     : ['ArrowUp', 'PageUp'].includes(event.key)
       ? -1
       : 0;
+  if (direction && canReadMore(readerFrom(event.target), direction)) return;
   if (event.key === 'Home' || event.key === 'End') {
     event.preventDefault();
     goToScene(event.key === 'Home' ? 0 : 3);
@@ -214,17 +259,40 @@ function onKey(event: KeyboardEvent) {
 
 function onTouchStart(event: TouchEvent) {
   touchStart = event.touches.length === 1 ? event.touches[0].clientY : undefined;
+  touchStartX = event.touches[0]?.clientX ?? 0;
+  touchReader = readerFrom(event.target);
+  touchPageTop = undefined;
+  nativeTouch = false;
   touchConsumed = false;
 }
 function onTouchMove(event: TouchEvent) {
-  if (!inScene() || touchStart === undefined || event.touches.length !== 1) return;
+  if (touchStart === undefined || event.touches.length !== 1) return;
   const distance = touchStart - event.touches[0].clientY;
+  if (touchPageTop !== undefined) {
+    event.preventDefault();
+    window.scrollTo({ top: touchPageTop + distance, behavior: 'instant' });
+    return;
+  }
+  if (!inScene()) return;
+  if (nativeTouch || Math.abs(event.touches[0].clientX - touchStartX) > Math.abs(distance)) return;
+  if (!touchConsumed && !transition && canReadMore(touchReader, Math.sign(distance))) {
+    nativeTouch = true;
+    return;
+  }
+  // The clipped stage cannot always chain a nested reader's touch scroll to the page.
+  // At the final story's boundary, continue following the finger into the footer.
+  if (touchReader && !transition && trigger!.progress > 0.999 && distance > 8) {
+    touchPageTop = window.scrollY;
+    event.preventDefault();
+    window.scrollTo({ top: touchPageTop + distance, behavior: 'instant' });
+    return;
+  }
   if (touchConsumed || transition) {
     touchConsumed = true;
     event.preventDefault();
     return;
   }
-  if (Math.abs(distance) > 24 && step(Math.sign(distance))) {
+  if (Math.abs(distance) > 8 && step(Math.sign(distance))) {
     touchConsumed = true;
     event.preventDefault();
   }
@@ -244,6 +312,11 @@ function updateIntroSpacing(progress: number) {
 }
 
 function resize() {
+  if (root.classList.contains('compact-motion')) {
+    measureCompact();
+    updateCompact(currentProgress);
+    return;
+  }
   const width = document.documentElement.clientWidth;
   const scale = Math.min(width / 1707, window.innerHeight / 1030);
   const extra = Math.max(0, width / scale - 1707);
@@ -269,15 +342,23 @@ function teardown() {
   trigger = undefined;
   animations.forEach(({ animation }) => animation.cancel());
   animations = [];
-  root.classList.remove('motion-ready');
+  clearCompact();
+  copies.forEach((copy) => {
+    copy.inert = false;
+    copy.removeAttribute('aria-hidden');
+    copy.removeAttribute('tabindex');
+  });
+  root.classList.remove('motion-ready', 'compact-motion');
 }
 
 function setup() {
+  const previousScene = trigger ? Math.round(trigger.progress * 3) : null;
   teardown();
-  resize();
   if (!preference.matches || showingStatic) return;
   root.classList.add('motion-ready');
-  makeAnimations();
+  root.classList.toggle('compact-motion', compactLayout.matches);
+  resize();
+  if (!compactLayout.matches) makeAnimations();
   trigger = ScrollTrigger.create({
     trigger: area,
     start: 'top top',
@@ -291,19 +372,33 @@ function setup() {
       }
     },
     invalidateOnRefresh: true,
+    onRefreshInit: (self) => {
+      // A new viewport height changes the scroll distance, not the selected project.
+      refreshScene =
+        window.scrollY >= self.start - 1 && window.scrollY <= self.end + 1
+          ? transition
+            ? targetScene
+            : Math.round(currentProgress * 3)
+          : null;
+    },
     onRefresh: (self) => {
       resize();
-      if (transition) goToScene(targetScene);
-      else {
-        update(self.progress);
-        if (self.progress > 0 && self.progress < 1) {
-          clearTimeout(settleTimer);
-          settleTimer = window.setTimeout(() => goToScene(Math.round(self.progress * 3)), 180);
-        }
+      if (refreshScene !== null) {
+        transition?.kill();
+        transition = undefined;
+        self.scroll(self.start + ((self.end - self.start) * refreshScene) / 3);
+        self.update();
       }
+      clearTimeout(settleTimer);
+      update(self.progress);
     },
   });
   update(trigger.progress);
+  if (previousScene !== null) {
+    window.scrollTo({ top: sceneScroll(previousScene), behavior: 'instant' });
+    ScrollTrigger.update();
+    update(trigger.progress);
+  }
 }
 
 function plainClick(event: MouseEvent) {
@@ -318,11 +413,16 @@ document.querySelectorAll<HTMLAnchorElement>('a[href="/#work"]').forEach((link) 
     }
   });
 });
-document.querySelector<HTMLAnchorElement>('.brand')?.addEventListener('click', (event) => {
-  if (!plainClick(event) || !trigger) return;
-  event.preventDefault();
-  goToScene(0);
-});
+document.querySelectorAll<HTMLAnchorElement>('.brand').forEach((link) =>
+  link.addEventListener('click', (event) => {
+    if (!plainClick(event) || !trigger) return;
+    event.preventDefault();
+    goToScene(0);
+  }),
+);
+sceneButtons.forEach((button) =>
+  button.addEventListener('click', () => step(Number(button.dataset.sceneStep))),
+);
 document.querySelector('[data-skip-motion]')?.addEventListener('click', (event) => {
   event.preventDefault();
   showingStatic = true;
@@ -338,10 +438,15 @@ window.addEventListener('keydown', onKey);
 window.addEventListener('touchstart', onTouchStart, { passive: true });
 window.addEventListener('touchmove', onTouchMove, { passive: false });
 preference.addEventListener('change', setup);
+compactLayout.addEventListener('change', setup);
 window.addEventListener('resize', resize, { passive: true });
 window.addEventListener('pagehide', teardown);
 window.addEventListener('pageshow', (event) => {
   if (event.persisted) setup();
+});
+document.fonts.ready.then(() => {
+  resize();
+  ScrollTrigger.refresh();
 });
 setup();
 if (location.hash === '#work') requestAnimationFrame(() => goToScene(1));

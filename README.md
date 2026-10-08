@@ -84,8 +84,9 @@ Where pixel-identical WebP files replaced PNGs, the original PNGs remain locally
 - On Home, Work animates to the first project and R_V animates back to the introduction, without reloading.
 - One scroll gesture completes one Home transition: down advances to the next cover, up returns to the previous cover. Decaying trackpad momentum is filtered, but fresh wheel input is accepted after each transition without moving the pointer. Scrolling works over text, artwork, navigation and empty space. Scrollbar movement settles to the nearest complete cover; the last cover allows normal scrolling to the footer. Arrow/Page keys and Space also move between covers.
 - “Scroll to explore” continuously rotates while the intro is visible and travels upward with the intro. The project sequence itself does not autoplay.
-- The three animated project illustrations use the approved October 4 desktop positions. The curved “Work” label has been removed. On phones the illustrations lead each project; tablets pair the artwork and text in two columns.
-- Phones and touch tablets use normal vertical scrolling. Long case studies have chapter links, and the CV offers a full-size PDF link as well as its download and preview.
+- The three animated project illustrations use the approved October 4 desktop positions. The curved “Work” label has been removed. Phones and tablets preserve the expanding circles, rotating project wheel and scroll transitions, with a compact stage for portrait and small screens.
+- Vertical phone swipes move forward/back through the same four Home scenes. Long project text scrolls within the active scene when space is limited; a further swipe at its boundary continues the wheel. Work and R_V retain their animated navigation, and arrow controls offer a tap/keyboard alternative. Static Home content is used only for Skip animation, reduced motion or no JavaScript.
+- Long case studies have chapter links, and the CV offers a full-size PDF link as well as its download and preview.
 - Skip animation and reduced-motion mode expose all three projects without motion.
 - Studio is not clickable; hover or keyboard focus shows “Coming soon.”
 - The third project links to its coming-soon page.

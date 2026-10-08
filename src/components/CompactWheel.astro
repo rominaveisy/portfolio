@@ -1,0 +1,38 @@
+---
+import { projects } from '../data/projects';
+---
+
+<div class="compact-labels" aria-hidden="true">
+  {projects.map((project, index) => (
+    <span style={`--label-index: ${index}`}>{project.title}</span>
+  ))}
+</div>
+<nav class="compact-scene-controls" aria-label="Animated project navigation">
+  <p class="sr-only" data-scene-announcement aria-live="polite"></p>
+  <button type="button" data-scene-step="-1" aria-label="Previous scene">
+    <svg
+      viewBox="0 0 24 24"
+      width="22"
+      height="22"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      aria-hidden="true"
+    >
+      <path d="M12 20V4m-6 6 6-6 6 6" />
+    </svg>
+  </button>
+  <button type="button" data-scene-step="1" aria-label="Next scene">
+    <svg
+      viewBox="0 0 24 24"
+      width="22"
+      height="22"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      aria-hidden="true"
+    >
+      <path d="M12 4v16m-6-6 6 6 6-6" />
+    </svg>
+  </button>
+</nav>

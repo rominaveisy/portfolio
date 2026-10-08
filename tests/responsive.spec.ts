@@ -29,7 +29,11 @@ for (const width of [320, 390, 768, 1023]) {
         expect(await board.evaluate((el) => getComputedStyle(el).zoom), route).toBe('1');
       const slots = await page.locator('main img[src]:not([alt=""])').evaluateAll((images) =>
         images
-          .filter((image) => !image.closest('[data-project-wheel]'))
+          .filter(
+            (image) =>
+              !image.closest('[data-project-wheel]') &&
+              !image.closest('.motion-ready .project-list'),
+          )
           .map((image) => {
             const box = image.getBoundingClientRect();
             return { src: image.getAttribute('src'), width: box.width, height: box.height };
@@ -110,17 +114,18 @@ test('Complex diagrams can be explored by keyboard inside the page', async ({ pa
   }
 });
 
-test('Resizing an animated cover to mobile restores the complete static introduction', async ({
+test('Resizing an animated cover to mobile preserves its scene and offers the static fallback', async ({
   page,
 }) => {
   await page.goto('/#work');
   await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', 'cyclointel');
   await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator('html')).toHaveClass(/compact-motion/);
+  await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', 'cyclointel');
+  await expect(page.locator('[data-project-link="cyclointel"]')).toBeVisible();
+  await page.locator('[data-skip-motion]').click();
   await expect(page.locator('html')).not.toHaveClass(/motion-ready/);
   await expect(page.locator('.project-card')).toHaveCount(3);
-  await expect(page.getByRole('heading', { name: 'I design experiences' })).toBeVisible();
-  await page.getByRole('link', { name: 'View selected work ↓' }).click();
-  await expect(page).toHaveURL(/#work$/);
   const bounds = await page.locator('#work').boundingBox();
   expect(bounds!.y).toBeGreaterThanOrEqual(68);
 });

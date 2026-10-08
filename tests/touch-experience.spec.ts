@@ -72,7 +72,7 @@ test.describe('Phone interactions', () => {
     expect(await page.evaluate(() => document.body.style.overflow)).not.toBe('hidden');
   });
 
-  test('Work flows naturally, uses light artwork, and opens the selected case study', async ({
+  test('Phone Work swipes through the desktop sequence and opens the case study', async ({
     page,
   }) => {
     const imageRequests: string[] = [];
@@ -80,43 +80,23 @@ test.describe('Phone interactions', () => {
       if (request.resourceType() === 'image') imageRequests.push(request.url());
     });
     await page.goto('/');
-    await expect(page.locator('html')).not.toHaveClass(/motion-ready/);
-    await swipe(page, [200, 700], [200, 250]);
-    await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(100);
-    // Wait for native fling scrolling to finish; a tap during a fling only stops it.
-    await page.evaluate(
-      () =>
-        new Promise<void>((resolve) => {
-          let previous = scrollY;
-          let stableFrames = 0;
-          const settled = () => {
-            stableFrames = scrollY === previous ? stableFrames + 1 : 0;
-            previous = scrollY;
-            if (stableFrames >= 6) resolve();
-            else requestAnimationFrame(settled);
-          };
-          requestAnimationFrame(settled);
-        }),
-    );
+    await expect(page.locator('html')).toHaveClass(/compact-motion/);
+    for (const scene of ['cyclointel', 'samenstad', 'positioning']) {
+      await swipe(page, [10, 700], [10, 300]);
+      await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', scene);
+      await expect(page.locator('[data-project-link][tabindex="0"]')).toHaveCount(1);
+    }
+    await page.getByRole('banner').getByRole('link', { name: 'Romina Veisy — home' }).tap();
+    await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', 'intro');
     await page.getByRole('button', { name: 'Menu', exact: true }).tap();
-    await expect(page.getByRole('dialog', { name: 'Site menu' })).toBeVisible();
     await page
       .getByRole('navigation', { name: 'Mobile navigation' })
       .getByRole('link', { name: 'Work', exact: true })
       .tap();
-    await expect(page).toHaveURL(/#work$/);
     await expect(page.getByRole('dialog', { name: 'Site menu' })).not.toBeVisible();
-    const project = page.getByRole('article', { name: 'From Signals to Strategy' });
-    const art = project.locator('img');
-    await art.evaluate((image: HTMLImageElement) => image.decode());
-    expect(await art.evaluate((image: HTMLImageElement) => image.currentSrc)).toContain(
-      '/cards/cyclointel-',
-    );
-    const artBox = (await art.boundingBox())!;
-    const headingBox = (await project.getByRole('heading').boundingBox())!;
-    expect(artBox.y + artBox.height).toBeLessThan(headingBox.y);
+    await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', 'cyclointel');
     expect(imageRequests.filter((url) => /\/images\/home\/.*\.png/.test(url))).toEqual([]);
-    await project.getByRole('link', { name: /Explore this work/ }).tap();
+    await page.locator('[data-project-link="cyclointel"]').tap();
     await expect(page).toHaveURL(/\/work\/cyclointel\/$/);
   });
 
@@ -145,6 +125,101 @@ test.describe('Phone interactions', () => {
       await expect(contents.locator('summary')).toBeFocused();
     });
   }
+
+  test('Reverse swipes, the rotating cue and the wheel stay active on phones', async ({ page }) => {
+    await page.goto('/');
+    const stage = page.locator('.home-stage');
+    const cue = page.locator('[data-figma-id="214:483"]');
+    const before = await cue.evaluate((el) => getComputedStyle(el).rotate);
+    await expect.poll(() => cue.evaluate((el) => getComputedStyle(el).rotate)).not.toBe(before);
+    await swipe(page, [10, 650], [10, 250]);
+    await expect(stage).toHaveAttribute('data-scene', 'cyclointel');
+    await swipe(page, [10, 650], [10, 250]);
+    await expect(stage).toHaveAttribute('data-scene', 'samenstad');
+    await swipe(page, [10, 250], [10, 650]);
+    await expect(stage).toHaveAttribute('data-scene', 'cyclointel');
+    await swipe(page, [10, 250], [10, 650]);
+    await expect(stage).toHaveAttribute('data-scene', 'intro');
+  });
+
+  test('Short phones keep the full story readable and scroll into the next scene at its boundary', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 568 });
+    await page.goto('/#work');
+    await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', 'cyclointel');
+    const reader = page.locator('[data-cover-copy="cyclointel"]');
+    expect(await reader.evaluate((el) => el.scrollHeight > el.clientHeight)).toBe(true);
+    const box = (await reader.boundingBox())!;
+    await swipe(page, [170, box.y + box.height - 15], [170, box.y + 15]);
+    await expect.poll(() => reader.evaluate((el) => el.scrollTop)).toBeGreaterThan(20);
+    await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', 'cyclointel');
+    await reader.evaluate((el) => {
+      el.scrollTop = el.scrollHeight;
+    });
+    await page.waitForFunction(() => {
+      const el = document.querySelector('[data-cover-copy="cyclointel"]')!;
+      return Math.abs(el.scrollHeight - el.clientHeight - el.scrollTop) < 2;
+    });
+    await swipe(page, [170, box.y + box.height - 15], [170, box.y + 15]);
+    await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', 'samenstad');
+    await expect(page.locator('[data-project-link="samenstad"]')).toBeInViewport();
+  });
+
+  test('Phone motion supports reduced motion, skips, menu isolation and orientation changes', async ({
+    page,
+  }) => {
+    await page.goto('/#work');
+    await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', 'cyclointel');
+    await page.getByRole('button', { name: 'Menu', exact: true }).tap();
+    await swipe(page, [200, 600], [200, 200]);
+    await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', 'cyclointel');
+    await page.keyboard.press('Escape');
+    await page.setViewportSize({ width: 844, height: 390 });
+    await expect
+      .poll(() =>
+        page.evaluate(() => {
+          const area = document.querySelector<HTMLElement>('.home-scroll')!;
+          return (scrollY - area.offsetTop) / (area.offsetHeight - innerHeight);
+        }),
+      )
+      .toBeCloseTo(1 / 3, 2);
+    await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', 'cyclointel');
+    await expect(page.locator('[data-project-link="cyclointel"]')).toBeInViewport();
+    await page.getByRole('button', { name: 'Next scene', exact: true }).tap();
+    await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', 'samenstad');
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await expect(page.locator('html')).not.toHaveClass(/motion-ready/);
+    await expect(page.locator('.project-card').first()).toBeVisible();
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await expect(page.locator('html')).toHaveClass(/motion-ready/);
+    await page.locator('[data-skip-motion]').click();
+    await expect(page.locator('html')).not.toHaveClass(/motion-ready/);
+    await expect(page.locator('.project-card').first().getByRole('link')).toBeVisible();
+  });
+
+  test('The final phone story scrolls into a readable footer and R_V returns to the intro', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    await page.keyboard.press('End');
+    await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', 'positioning');
+    const reader = page.locator('[data-cover-copy="positioning"]');
+    await reader.evaluate((el) => {
+      el.scrollTop = el.scrollHeight;
+    });
+    const box = (await reader.boundingBox())!;
+    await swipe(page, [170, box.y + box.height - 20], [170, box.y + 20]);
+    const footer = page.locator('.home-footer');
+    await expect(footer).toBeInViewport();
+    for (const link of await footer.getByRole('link').all()) {
+      const bounds = (await link.boundingBox())!;
+      expect(bounds.x).toBeGreaterThanOrEqual(0);
+      expect(bounds.x + bounds.width).toBeLessThanOrEqual(390);
+    }
+    await page.getByRole('banner').getByRole('link', { name: 'Romina Veisy — home' }).click();
+    await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', 'intro');
+  });
 
   test('Gallery swipes next and previous; vertical gestures do not advance; closing restores focus', async ({
     page,
@@ -206,7 +281,7 @@ for (const [width, height] of [
   [1024, 768],
   [1366, 1024],
 ]) {
-  test(`Touch tablet ${width}×${height} reflows every page and supports normal scrolling`, async ({
+  test(`Touch tablet ${width}×${height} reflows every page and preserves Home motion`, async ({
     browser,
   }) => {
     const context = await browser.newContext({
@@ -227,13 +302,14 @@ for (const [width, height] of [
         if (await board.count())
           expect(await board.evaluate((el) => getComputedStyle(el).zoom), route).toBe('1');
         if (route === '/') {
-          await expect(page.locator('html')).not.toHaveClass(/motion-ready/);
-          const card = page.locator('.project-card').first();
-          const image = (await card.locator('img').boundingBox())!;
-          const copy = (await card.getByRole('heading').boundingBox())!;
-          expect(image.x + image.width).toBeLessThan(copy.x);
-          await swipe(page, [width / 2, height - 120], [width / 2, 220]);
-          await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(100);
+          await expect(page.locator('html')).toHaveClass(/motion-ready/);
+          await swipe(page, [width - 30, height - 120], [width - 30, 180]);
+          await expect(page.locator('.home-stage')).toHaveAttribute('data-scene', 'cyclointel');
+          const button = (await page.locator('[data-project-link="cyclointel"]').boundingBox())!;
+          expect(button.x).toBeGreaterThanOrEqual(0);
+          expect(button.y).toBeGreaterThanOrEqual(68);
+          expect(button.x + button.width).toBeLessThanOrEqual(width);
+          expect(button.y + button.height).toBeLessThanOrEqual(height);
         }
       }
       expect(errors).toEqual([]);
